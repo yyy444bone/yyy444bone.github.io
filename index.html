@@ -1,0 +1,809 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZIYI YANG | Tech Insights</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        'black-custom': '#0A0A0A',
+                        'matcha': '#8AA899',
+                        'linen-gray': '#E0E0D1',
+                    },
+                    fontFamily: {
+                        sans: ['PingFang SC', 'Helvetica Neue', 'Arial', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            
+            .title-effect {
+                background-clip: text;
+                -webkit-background-clip: text;
+                color: transparent;
+                transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+                line-height: 0.85;
+                display: inline-block;
+                position: relative;
+                z-index: 10;
+            }
+            .line-height-tight {
+                line-height: 0.85 !important;
+            }
+            .title-effect:hover {
+                transform: translateY(-3px) scale(1.03);
+                text-shadow: 0 0 20px rgba(138, 168, 153, 0.6);
+            }
+            .card-hover {
+                transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            }
+            .card-hover:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 15px 20px -5px rgba(138, 168, 153, 0.1);
+            }
+            
+            /* 卡片交错效果 */
+            .stagger-1 {
+                transform: translateY(0px) rotate(0deg);
+            }
+            .stagger-2 {
+                transform: translateY(10px) rotate(-0.5deg);
+            }
+            .stagger-3 {
+                transform: translateY(5px) rotate(0.5deg);
+            }
+            .stagger-4 {
+                transform: translateY(15px) rotate(-1deg);
+            }
+            .nav-item {
+                transition: all 0.3s ease;
+            }
+            .nav-item:hover {
+                transform: translateX(-5px);
+            }
+            .social-icon {
+                transition: all 0.3s ease;
+            }
+            .social-icon:hover {
+                transform: translateY(-5px) scale(1.1);
+            }
+            .photo-frame {
+                transition: all 0.5s ease;
+                object-fit: cover;
+            }
+            .photo-frame:hover {
+                transform: scale(1.05);
+                box-shadow: 0 0 0 4px rgba(138, 168, 153, 0.3);
+            }
+            .article-tag {
+                transition: all 0.3s ease;
+            }
+            .article-tag:hover {
+                transform: translateY(-3px) scale(1.05);
+                background-color: rgba(138, 168, 153, 0.3);
+            }
+            .floating {
+                animation: float 6s ease-in-out infinite;
+                transition: all 0.4s ease;
+                cursor: pointer;
+            }
+            .floating:hover {
+                transform: translateY(-20px) scale(1.1);
+                box-shadow: 0 10px 25px rgba(138, 168, 153, 0.3);
+            }
+            @keyframes float {
+                0% { transform: translateY(0px); }
+                50% { transform: translateY(-15px); }
+                100% { transform: translateY(0px); }
+            }
+            .floating-delay-1 {
+                animation-delay: 1s;
+            }
+            .floating-delay-2 {
+                animation-delay: 2s;
+            }
+            /* 名字和介绍的新交互效果 */
+            .name-container {
+                position: relative;
+                overflow: hidden;
+                display: inline-block;
+                padding: 0 10px;
+                z-index: 10;
+            }
+            .name-container::before {
+                content: '';
+                position: absolute;
+                top: 50%;
+                left: -100%;
+                width: 100%;
+                height: 2px;
+                background: linear-gradient(90deg, transparent, #8AA899, transparent);
+                transform: translateY(-50%);
+                transition: left 0.8s ease;
+            }
+            .name-container:hover::before {
+                left: 100%;
+            }
+            .intro-text {
+                position: relative;
+                transition: all 0.5s ease;
+                display: inline-block;
+                padding: 5px 0;
+            }
+            .intro-text:hover {
+                letter-spacing: 0.5px;
+            }
+            .intro-text::after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 0;
+                height: 1px;
+                background: linear-gradient(to right, #8AA899, #E0E0D1);
+                transition: width 0.5s ease;
+            }
+            .intro-text:hover::after {
+                width: 100%;
+            }
+            /* 自适应瀑布流布局 */
+            .masonry-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                grid-gap: 1rem;
+                grid-auto-rows: auto;
+            }
+            @media (min-width: 768px) {
+                .masonry-grid {
+                    grid-template-columns: repeat(2, 1fr);
+                }
+            }
+            @media (min-width: 1024px) {
+                .masonry-grid {
+                    grid-template-columns: repeat(3, 1fr);
+                }
+            }
+            @media (min-width: 1280px) {
+                .masonry-grid {
+                    grid-template-columns: repeat(4, 1fr);
+                }
+            }
+        }
+    </style>
+    <style>
+        ::-webkit-scrollbar {
+            display: none;
+        }
+        html {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+            font-family: 'PingFang SC', 'Helvetica Neue', Arial, sans-serif;
+        }
+        /* 紧凑的内容样式 */
+        .ultra-compact {
+            font-size: 0.75rem;
+            line-height: 1.0;
+            margin: 0;
+            padding: 0;
+        }
+        .tight-margin {
+            margin-top: 0.1rem !important;
+            margin-bottom: 0.3rem !important;
+        }
+        .tag-style {
+            font-size: 0.6rem !important;
+            padding: 0.1rem 0.4rem !important;
+            margin: 0.15rem !important;
+        }
+        .tag-matcha {
+            background-color: rgba(138, 168, 153, 0.2);
+            color: #8AA899;
+        }
+        .tag-linen {
+            background-color: rgba(224, 224, 209, 0.2);
+            color: #E0E0D1;
+        }
+        .card-padding {
+            padding: 0.75rem !important;
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+        }
+        .category-style {
+            font-size: 0.65rem !important;
+            margin-bottom: 0 !important;
+        }
+        .date-style {
+            font-size: 0.6rem !important;
+        }
+        .article-footer {
+            display: none;
+        }
+        /* 确保项目标题完整显示 */
+        .project-title {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 100%;
+        }
+    </style>
+</head>
+<body class="bg-black-custom text-white min-h-screen overflow-x-hidden relative">
+    <!-- 动态背景 - 9个气泡 -->
+    <div id="bubbles-container" class="fixed inset-0 w-full h-full pointer-events-none z-0"></div>
+
+    <div class="flex flex-col md:flex-row min-h-screen relative z-10">
+        <!-- 左侧：文章总览 -->
+        <div class="w-full md:w-3/4 p-4 md:p-6">
+            <!-- 博主信息和照片 - 名字居中 -->
+            <div class="mb-6 mt-2 flex flex-col md:flex-row items-center gap-4 md:gap-0">
+                <!-- 博主信息 - 居中显示 -->
+                <div class="flex-1 min-w-0 text-center md:text-left">
+                    <h1 class="text-[clamp(1.4rem,4vw,2.2rem)] font-bold mb-1 name-container mx-auto">
+                        <span class="title-effect bg-gradient-to-r from-matcha to-linen-gray">ZIYI YANG</span>
+                        <div class="text-base md:text-lg font-bold mt-0.25">子銥 · 楊</div>
+                    </h1>
+                    <!-- 两行布局的介绍文本 -->
+                    <p class="text-sm md:text-base font-medium intro-text max-w-xl mt-2 mx-auto md:mx-0 leading-relaxed">
+                        EXPLORING THE INTERSECTIONS OF <span class="text-matcha">CS</span>, <span class="text-matcha">AI</span>,<br>
+                        <span class="text-matcha">BLOCKCHAIN</span>, AND <span class="text-linen-gray">MATH</span>
+                    </p>
+                    
+                    <!-- 联系方式图标 - 居中 -->
+                    <div class="flex gap-2 mt-3 justify-center md:justify-start">
+                        <a href="#" class="social-icon w-8 h-8 rounded-full bg-matcha/20 flex items-center justify-center text-matcha" aria-label="GitHub profile">
+                            <i class="fa fa-github"></i>
+                        </a>
+                        <a href="#" class="social-icon w-8 h-8 rounded-full bg-matcha/20 flex items-center justify-center text-matcha" aria-label="Twitter profile">
+                            <i class="fa fa-twitter"></i>
+                        </a>
+                        <a href="mailto:your-email@example.com" class="social-icon w-8 h-8 rounded-full bg-matcha/20 flex items-center justify-center text-matcha" aria-label="Email contact">
+                            <i class="fa fa-envelope"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- 照片与三个气泡 - 右侧 -->
+                <div class="flex justify-center items-center gap-[-15px] relative h-36 w-full md:w-auto mt-4 md:mt-0">
+                    <a href="#" class="floating w-18 h-18 rounded-full bg-matcha/20 p-1.5 flex flex-col justify-center items-center text-center shadow-[0_0_12px_rgba(138,168,153,0.7)] z-10">
+                        <p class="text-xs text-gray-300 mb-0.25 font-bold">Articles</p>
+                        <p class="text-base font-bold text-gray-300">15+</p>
+                    </a>
+                    
+                    <!-- 个人照片为正方形 -->
+                    <div class="photo-frame floating relative w-24 h-24 md:w-28 md:h-28 rounded-lg border-3 border-matcha/30 overflow-hidden z-20">
+                        <img src="https://picsum.photos/200/200" alt="Profile photo of ZIYI YANG" class="w-full h-full object-cover">
+                    </div>
+                    
+                    <div class="floating floating-delay-1 w-18 h-18 rounded-full bg-matcha/20 p-1.5 flex flex-col justify-center items-center text-center shadow-[0_0_12px_rgba(138,168,153,0.7)] z-10">
+                        <p class="text-xs text-gray-300 mb-0.25 font-bold">Projects</p>
+                        <p class="text-base font-bold text-gray-300">15</p>
+                    </div>
+                    
+                    <div class="floating floating-delay-2 w-18 h-18 rounded-full bg-matcha/20 p-1.5 flex flex-col justify-center items-center text-center shadow-[0_0_12px_rgba(138,168,153,0.7)] z-10">
+                        <p class="text-xs text-gray-300 mb-0.25 font-bold">Updated</p>
+                        <p class="text-xs font-bold text-gray-300">2023.10</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 内容导航 -->
+            <div class="mb-5 flex flex-wrap gap-4">
+                <a href="#" class="nav-item flex items-center gap-1.5 text-base font-bold text-gray-400 group hover:text-white">
+                    <span class="w-8 h-8 rounded-full bg-gradient-to-r from-matcha to-linen-gray flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <i class="fa fa-file-text-o"></i>
+                    </span>
+                    <span>Articles</span>
+                </a>
+                <a href="#" class="nav-item flex items-center gap-1.5 text-base font-bold text-gray-400 group hover:text-white">
+                    <span class="w-8 h-8 rounded-full bg-gradient-to-r from-matcha to-linen-gray flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <i class="fa fa-cubes"></i>
+                    </span>
+                    <span>Projects</span>
+                </a>
+            </div>
+
+            <!-- Projects栏 - 一行放四个，修复标题显示 -->
+            <div class="mb-6">
+                <h2 class="text-base font-bold text-white mb-3">PROJECTS</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
+                    <div class="bg-white/5 backdrop-blur-md rounded-lg card-padding border border-white/10 card-hover h-auto">
+                        <h3 class="text-sm font-bold mb-1 title-effect bg-gradient-to-r from-matcha to-linen-gray project-title">
+                            <a href="#" target="_blank" class="hover:underline">AI Research Dashboard</a>
+                        </h3>
+                        <p class="text-gray-400 ultra-compact">Visualization tool for neural network performance metrics.</p>
+                    </div>
+                    <div class="bg-white/5 backdrop-blur-md rounded-lg card-padding border border-white/10 card-hover h-auto">
+                        <h3 class="text-sm font-bold mb-1 title-effect bg-gradient-to-r from-matcha to-linen-gray project-title">
+                            <a href="#" target="_blank" class="hover:underline">Blockchain Explorer</a>
+                        </h3>
+                        <p class="text-gray-400 ultra-compact">Decentralized app for exploring blockchain transactions.</p>
+                    </div>
+                    <div class="bg-white/5 backdrop-blur-md rounded-lg card-padding border border-white/10 card-hover h-auto">
+                        <h3 class="text-sm font-bold mb-1 title-effect bg-gradient-to-r from-matcha to-linen-gray project-title">
+                            <a href="#" target="_blank" class="hover:underline">Mathematical Modeling Suite</a>
+                        </h3>
+                        <p class="text-gray-400 ultra-compact">Tools for complex mathematical computations.</p>
+                    </div>
+                    <div class="bg-white/5 backdrop-blur-md rounded-lg card-padding border border-white/10 card-hover h-auto">
+                        <h3 class="text-sm font-bold mb-1 title-effect bg-gradient-to-r from-matcha to-linen-gray project-title">
+                            <a href="#" target="_blank" class="hover:underline">Quantum Simulator</a>
+                        </h3>
+                        <p class="text-gray-400 ultra-compact">Simulate quantum computing algorithms in classical environments.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 文章列表标题 -->
+            <div class="mb-4">
+                <h2 class="text-base font-bold text-white mb-3">ARTICLES</h2>
+            </div>
+
+            <!-- 文章列表 - 15篇文章 -->
+            <div class="masonry-grid mb-8">
+                <!-- 文章1 -->
+                <article class="bg-white/5 backdrop-blur-md rounded-lg card-padding border border-white/10 card-hover h-auto stagger-1">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between">
+                        <span class="text-matcha category-style font-bold">ARTIFICIAL INTELLIGENCE</span>
+                        <div class="text-gray-400 date-style flex items-center gap-2">
+                            <span>2023.10.02</span>
+                            <span><i class="fa fa-pencil"></i> 3k</span>
+                        </div>
+                    </div>
+                    <h2 class="text-sm md:text-base font-bold tight-margin title-effect bg-gradient-to-r from-matcha to-linen-gray line-height-tight">
+                        <a href="#">The Evolution of Neural Networks in Modern AI Systems</a>
+                    </h2>
+                    <p class="text-gray-300 ultra-compact">Exploring how neural network architectures have evolved over the past decade and their impact on current AI capabilities.</p>
+                    <div class="flex flex-wrap">
+                        <span class="article-tag bg-matcha/20 text-matcha rounded-full tag-style font-bold">Neural Networks</span>
+                        <span class="article-tag bg-matcha/20 text-matcha rounded-full tag-style font-bold">AI</span>
+                    </div>
+                </article>
+
+                <!-- 文章2 -->
+                <article class="bg-white/5 backdrop-blur-md rounded-lg card-padding border border-white/10 card-hover h-auto stagger-2">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between">
+                        <span class="text-matcha category-style font-bold">BLOCKCHAIN</span>
+                        <div class="text-gray-400 date-style flex items-center gap-2">
+                            <span>2023.09.28</span>
+                            <span><i class="fa fa-pencil"></i> 4k</span>
+                        </div>
+                    </div>
+                    <h2 class="text-sm md:text-base font-bold tight-margin title-effect bg-gradient-to-r from-matcha to-linen-gray line-height-tight">
+                        <a href="#">Interoperability: The Future of Blockchain Ecosystems</a>
+                    </h2>
+                    <p class="text-gray-300 ultra-compact">Analyzing the current state of blockchain interoperability solutions and their potential to create a unified decentralized ecosystem.</p>
+                    <div class="flex flex-wrap">
+                        <span class="article-tag bg-matcha/20 text-matcha rounded-full tag-style font-bold">Blockchain</span>
+                        <span class="article-tag bg-linen-gray/20 text-linen-gray rounded-full tag-style font-bold">Web3</span>
+                    </div>
+                </article>
+
+                <!-- 文章3 -->
+                <article class="bg-white/5 backdrop-blur-md rounded-lg card-padding border border-white/10 card-hover h-auto stagger-3">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between">
+                        <span class="text-matcha category-style font-bold">MATH</span>
+                        <div class="text-gray-400 date-style flex items-center gap-2">
+                            <span>2023.09.10</span>
+                            <span><i class="fa fa-pencil"></i> 2.5k</span>
+                        </div>
+                    </div>
+                    <h2 class="text-sm md:text-base font-bold tight-margin title-effect bg-gradient-to-r from-matcha to-linen-gray line-height-tight">
+                        <a href="#">Mathematical Foundations of Algorithmic Complexity</a>
+                    </h2>
+                    <p class="text-gray-300 ultra-compact">A deep dive into the mathematical principles that govern algorithm efficiency and computational complexity theory.</p>
+                    <div class="flex flex-wrap">
+                        <span class="article-tag bg-matcha/20 text-matcha rounded-full tag-style font-bold">Math</span>
+                        <span class="article-tag bg-linen-gray/20 text-linen-gray rounded-full tag-style font-bold">Algorithms</span>
+                    </div>
+                </article>
+
+                <!-- 文章4 -->
+                <article class="bg-white/5 backdrop-blur-md rounded-lg card-padding border border-white/10 card-hover h-auto stagger-4">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between">
+                        <span class="text-linen-gray category-style font-bold">COMPUTER SCIENCE</span>
+                        <div class="text-gray-400 date-style flex items-center gap-2">
+                            <span>2023.08.25</span>
+                            <span><i class="fa fa-pencil"></i> 5k</span>
+                        </div>
+                    </div>
+                    <h2 class="text-sm md:text-base font-bold tight-margin title-effect bg-gradient-to-r from-matcha to-linen-gray line-height-tight">
+                        <a href="#">Quantum Computing: Implications for Cryptography</a>
+                    </h2>
+                    <p class="text-gray-300 ultra-compact">Exploring how quantum computing advancements could disrupt current cryptographic systems and what post-quantum solutions are being developed.</p>
+                    <div class="flex flex-wrap">
+                        <span class="article-tag bg-matcha/20 text-matcha rounded-full tag-style font-bold">Quantum</span>
+                        <span class="article-tag bg-linen-gray/20 text-linen-gray rounded-full tag-style font-bold">Cryptography</span>
+                    </div>
+                </article>
+
+                <!-- 文章5 -->
+                <article class="bg-white/5 backdrop-blur-md rounded-lg card-padding border border-white/10 card-hover h-auto stagger-1">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between">
+                        <span class="text-matcha category-style font-bold">AI</span>
+                        <div class="text-gray-400 date-style flex items-center gap-2">
+                            <span>2023.08.12</span>
+                            <span><i class="fa fa-pencil"></i> 2k</span>
+                        </div>
+                    </div>
+                    <h2 class="text-sm md:text-base font-bold tight-margin title-effect bg-gradient-to-r from-matcha to-linen-gray line-height-tight">
+                        <a href="#">Ethical Considerations in AI Development</a>
+                    </h2>
+                    <p class="text-gray-300 ultra-compact">Addressing the ethical challenges faced by AI developers and the importance of responsible innovation in artificial intelligence.</p>
+                    <div class="flex flex-wrap">
+                        <span class="article-tag bg-matcha/20 text-matcha rounded-full tag-style font-bold">AI Ethics</span>
+                        <span class="article-tag bg-linen-gray/20 text-linen-gray rounded-full tag-style font-bold">Responsible AI</span>
+                    </div>
+                </article>
+
+                <!-- 文章6 -->
+                <article class="bg-white/5 backdrop-blur-md rounded-lg card-padding border border-white/10 card-hover h-auto stagger-2">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between">
+                        <span class="text-linen-gray category-style font-bold">BLOCKCHAIN</span>
+                        <div class="text-gray-400 date-style flex items-center gap-2">
+                            <span>2023.07.30</span>
+                            <span><i class="fa fa-pencil"></i> 3.8k</span>
+                        </div>
+                    </div>
+                    <h2 class="text-sm md:text-base font-bold tight-margin title-effect bg-gradient-to-r from-matcha to-linen-gray line-height-tight">
+                        <a href="#">The Environmental Impact of Proof-of-Work vs. Proof-of-Stake</a>
+                    </h2>
+                    <p class="text-gray-300 ultra-compact">A data-driven analysis comparing the energy consumption and carbon footprint of different blockchain consensus mechanisms.</p>
+                    <div class="flex flex-wrap">
+                        <span class="article-tag bg-matcha/20 text-matcha rounded-full tag-style font-bold">Blockchain</span>
+                        <span class="article-tag bg-linen-gray/20 text-linen-gray rounded-full tag-style font-bold">Sustainability</span>
+                    </div>
+                </article>
+
+                <!-- 文章7 -->
+                <article class="bg-white/5 backdrop-blur-md rounded-lg card-padding border border-white/10 card-hover h-auto stagger-3">
+                    <div class="flex flex-wrap items-center gap-0.5 mb-0.5">
+                        <span class="article-tag tag-matcha rounded-full tag-style font-bold whitespace-nowrap">Data Science</span>
+                        <span class="article-tag tag-linen rounded-full tag-style font-bold whitespace-nowrap">Feature Engineering</span>
+                        <div class="text-gray-400 date-style flex items-center gap-1 ml-auto">
+                            <span>2023.07.15</span>
+                            <span><i class="fa fa-pencil"></i> 3.2k</span>
+                        </div>
+                    </div>
+                    <h2 class="text-xs md:text-sm font-bold tight-margin title-effect bg-gradient-to-r from-matcha to-linen-gray line-height-tight">
+                        <a href="#" class="hover:underline">Feature Engineering for Machine Learning Models</a>
+                    </h2>
+                    <p class="text-gray-300 ultra-compact mt-0.5">Advanced techniques for creating, selecting, and transforming features to improve machine learning model performance.</p>
+                </article>
+
+                <!-- 文章8 -->
+                <article class="bg-white/5 backdrop-blur-md rounded-lg card-padding border border-white/10 card-hover h-auto stagger-4">
+                    <div class="flex flex-wrap items-center gap-0.5 mb-0.5">
+                        <span class="article-tag tag-matcha rounded-full tag-style font-bold whitespace-nowrap">Transformers</span>
+                        <span class="article-tag tag-linen rounded-full tag-style font-bold whitespace-nowrap">NLP</span>
+                        <div class="text-gray-400 date-style flex items-center gap-1 ml-auto">
+                            <span>2023.06.30</span>
+                            <span><i class="fa fa-pencil"></i> 4.1k</span>
+                        </div>
+                    </div>
+                    <h2 class="text-xs md:text-sm font-bold tight-margin title-effect bg-gradient-to-r from-matcha to-linen-gray line-height-tight">
+                        <a href="#" class="hover:underline">Transformer Architectures: Beyond Language Processing</a>
+                    </h2>
+                    <p class="text-gray-300 ultra-compact mt-0.5">Exploring how transformer models are being applied beyond NLP to computer vision and other domains.</p>
+                </article>
+
+                <!-- 文章9 -->
+                <article class="bg-white/5 backdrop-blur-md rounded-lg card-padding border border-white/10 card-hover h-auto stagger-1">
+                    <div class="flex flex-wrap items-center gap-0.5 mb-0.5">
+                        <span class="article-tag tag-matcha rounded-full tag-style font-bold whitespace-nowrap">Smart Contracts</span>
+                        <span class="article-tag tag-linen rounded-full tag-style font-bold whitespace-nowrap">Security</span>
+                        <div class="text-gray-400 date-style flex items-center gap-1 ml-auto">
+                            <span>2023.06.15</span>
+                            <span><i class="fa fa-pencil"></i> 2.9k</span>
+                        </div>
+                    </div>
+                    <h2 class="text-xs md:text-sm font-bold tight-margin title-effect bg-gradient-to-r from-matcha to-linen-gray line-height-tight">
+                        <a href="#" class="hover:underline">Smart Contract Security: Common Vulnerabilities and Solutions</a>
+                    </h2>
+                    <p class="text-gray-300 ultra-compact mt-0.5">A comprehensive guide to identifying and mitigating security risks in blockchain smart contracts.</p>
+                </article>
+
+                <!-- 文章10 -->
+                <article class="bg-white/5 backdrop-blur-md rounded-lg card-padding border border-white/10 card-hover h-auto stagger-2">
+                    <div class="flex flex-wrap items-center gap-0.5 mb-0.5">
+                        <span class="article-tag tag-matcha rounded-full tag-style font-bold whitespace-nowrap">Topology</span>
+                        <span class="article-tag tag-linen rounded-full tag-style font-bold whitespace-nowrap">Data Analysis</span>
+                        <div class="text-gray-400 date-style flex items-center gap-1 ml-auto">
+                            <span>2023.05.28</span>
+                            <span><i class="fa fa-pencil"></i> 1.8k</span>
+                        </div>
+                    </div>
+                    <h2 class="text-xs md:text-sm font-bold tight-margin title-effect bg-gradient-to-r from-matcha to-linen-gray line-height-tight">
+                        <a href="#" class="hover:underline">Topological Data Analysis in Machine Learning</a>
+                    </h2>
+                    <p class="text-gray-300 ultra-compact mt-0.5">How topological methods are providing new insights into complex data structures and patterns.</p>
+                </article>
+
+                <!-- 文章11 -->
+                <article class="bg-white/5 backdrop-blur-md rounded-lg card-padding border border-white/10 card-hover h-auto stagger-3">
+                    <div class="flex flex-wrap items-center gap-0.5 mb-0.5">
+                        <span class="article-tag tag-matcha rounded-full tag-style font-bold whitespace-nowrap">Distributed Systems</span>
+                        <span class="article-tag tag-linen rounded-full tag-style font-bold whitespace-nowrap">Consistency</span>
+                        <div class="text-gray-400 date-style flex items-center gap-1 ml-auto">
+                            <span>2023.05.10</span>
+                            <span><i class="fa fa-pencil"></i> 3.5k</span>
+                        </div>
+                    </div>
+                    <h2 class="text-xs md:text-sm font-bold tight-margin title-effect bg-gradient-to-r from-matcha to-linen-gray line-height-tight">
+                        <a href="#" class="hover:underline">Distributed Systems: Consistency Models Explained</a>
+                    </h2>
+                    <p class="text-gray-300 ultra-compact mt-0.5">A detailed comparison of consistency models in distributed systems and their practical applications.</p>
+                </article>
+
+                <!-- 文章12 -->
+                <article class="bg-white/5 backdrop-blur-md rounded-lg card-padding border border-white/10 card-hover h-auto stagger-4">
+                    <div class="flex flex-wrap items-center gap-0.5 mb-0.5">
+                        <span class="article-tag tag-matcha rounded-full tag-style font-bold whitespace-nowrap">Generative AI</span>
+                        <span class="article-tag tag-linen rounded-full tag-style font-bold whitespace-nowrap">GANs</span>
+                        <div class="text-gray-400 date-style flex items-center gap-1 ml-auto">
+                            <span>2023.04.22</span>
+                            <span><i class="fa fa-pencil"></i> 4.7k</span>
+                        </div>
+                    </div>
+                    <h2 class="text-xs md:text-sm font-bold tight-margin title-effect bg-gradient-to-r from-matcha to-linen-gray line-height-tight">
+                        <a href="#" class="hover:underline">Generative AI: From GANs to Diffusion Models</a>
+                    </h2>
+                    <p class="text-gray-300 ultra-compact mt-0.5">Tracing the evolution of generative models and their revolutionary impact on content creation.</p>
+                </article>
+
+                <!-- 文章13 -->
+                <article class="bg-white/5 backdrop-blur-md rounded-lg card-padding border border-white/10 card-hover h-auto stagger-1">
+                    <div class="flex flex-wrap items-center gap-0.5 mb-0.5">
+                        <span class="article-tag tag-matcha rounded-full tag-style font-bold whitespace-nowrap">DeFi</span>
+                        <span class="article-tag tag-linen rounded-full tag-style font-bold whitespace-nowrap">Finance</span>
+                        <div class="text-gray-400 date-style flex items-center gap-1 ml-auto">
+                            <span>2023.04.05</span>
+                            <span><i class="fa fa-pencil"></i> 2.3k</span>
+                        </div>
+                    </div>
+                    <h2 class="text-xs md:text-sm font-bold tight-margin title-effect bg-gradient-to-r from-matcha to-linen-gray line-height-tight">
+                        <a href="#" class="hover:underline">Decentralized Finance: The Future of Banking</a>
+                    </h2>
+                    <p class="text-gray-300 ultra-compact mt-0.5">Analyzing how DeFi protocols are reshaping traditional financial services and their potential impact.</p>
+                </article>
+
+                <!-- 文章14 -->
+                <article class="bg-white/5 backdrop-blur-md rounded-lg card-padding border border-white/10 card-hover h-auto stagger-2">
+                    <div class="flex flex-wrap items-center gap-0.5 mb-0.5">
+                        <span class="article-tag tag-matcha rounded-full tag-style font-bold whitespace-nowrap">Quantum Computing</span>
+                        <span class="article-tag tag-linen rounded-full tag-style font-bold whitespace-nowrap">Math</span>
+                        <div class="text-gray-400 date-style flex items-center gap-1 ml-auto">
+                            <span>2023.03.18</span>
+                            <span><i class="fa fa-pencil"></i> 1.5k</span>
+                        </div>
+                    </div>
+                    <h2 class="text-sm md:text-base font-bold tight-margin title-effect bg-gradient-to-r from-matcha to-linen-gray line-height-tight">
+                        <a href="#">Graph Theory Applications in Network Analysis</a>
+                    </h2>
+                    <p class="text-gray-300 ultra-compact">How graph theory provides powerful tools for analyzing complex networks in social media and beyond.</p>
+                    <div class="flex flex-wrap">
+                        <span class="article-tag bg-matcha/20 text-matcha rounded-full tag-style font-bold">Graph Theory</span>
+                        <span class="article-tag bg-linen-gray/20 text-linen-gray rounded-full tag-style font-bold">Networks</span>
+                    </div>
+                </article>
+
+                <!-- 文章15 -->
+                <article class="bg-white/5 backdrop-blur-md rounded-lg card-padding border border-white/10 card-hover h-auto stagger-3">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between">
+                        <span class="text-linen-gray category-style font-bold">CS</span>
+                        <div class="text-gray-400 date-style flex items-center gap-2">
+                            <span>2023.03.02</span>
+                            <span><i class="fa fa-pencil"></i> 3.0k</span>
+                        </div>
+                    </div>
+                    <h2 class="text-sm md:text-base font-bold tight-margin title-effect bg-gradient-to-r from-matcha to-linen-gray line-height-tight">
+                        <a href="#">Edge Computing: Redefining Data Processing Architectures</a>
+                    </h2>
+                    <p class="text-gray-300 ultra-compact">Exploring how edge computing is addressing latency challenges in IoT and real-time applications.</p>
+                    <div class="flex flex-wrap">
+                        <span class="article-tag bg-matcha/20 text-matcha rounded-full tag-style font-bold">Edge Computing</span>
+                        <span class="article-tag bg-linen-gray/20 text-linen-gray rounded-full tag-style font-bold">IoT</span>
+                    </div>
+                </article>
+            </div>
+        </div>
+
+        <!-- 右侧：导航栏和标签（60个标签） -->
+        <div class="w-full md:w-1/4 bg-white/5 backdrop-blur-md border-l border-white/10 p-4 flex flex-col">
+            <!-- 简约版权信息 -->
+            <div class="mb-4 pb-3 border-b border-matcha/30 relative overflow-hidden group">
+                <div class="absolute inset-0 bg-gradient-to-r from-matcha/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div class="relative z-10">
+                    <h3 class="text-matcha font-bold mb-0.5 text-sm">ZIYI YANG</h3>
+                    <div class="flex items-center text-xs text-gray-500">
+                        <i class="fa fa-copyright mr-1"></i>
+                        <span>2023-2025</span>
+                    </div>
+                </div>
+            </div>
+            
+            <nav class="mt-4 flex flex-col gap-4">
+                <a href="#" class="nav-item flex items-center gap-1.5 text-sm font-bold text-white group">
+                    <span class="w-8 h-8 rounded-full bg-gradient-to-r from-matcha to-matcha flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <i class="fa fa-home"></i>
+                    </span>
+                    <span>Home</span>
+                </a>
+                <a href="#" class="nav-item flex items-center gap-1.5 text-sm font-bold text-gray-400 group hover:text-white">
+                    <span class="w-8 h-8 rounded-full bg-gradient-to-r from-matcha to-linen-gray flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <i class="fa fa-file-text-o"></i>
+                    </span>
+                    <span>Articles</span>
+                </a>
+                <a href="#" class="nav-item flex items-center gap-1.5 text-sm font-bold text-gray-400 group hover:text-white">
+                    <span class="w-8 h-8 rounded-full bg-gradient-to-r from-matcha to-linen-gray flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <i class="fa fa-cubes"></i>
+                    </span>
+                    <span>Projects</span>
+                </a>
+            </nav>
+
+            <!-- 标签栏 - 60个标签 -->
+            <div class="mt-6 overflow-y-auto flex-grow pr-2">
+                <h3 class="text-sm mb-2 font-bold text-white">TAGS</h3>
+                <div class="flex flex-wrap gap-1">
+                    <!-- 技术领域标签 -->
+                    <span class="article-tag bg-matcha/20 text-matcha rounded-full tag-style font-bold">Machine Learning</span>
+                    <span class="article-tag bg-matcha/20 text-matcha rounded-full tag-style font-bold">Blockchain</span>
+                    <span class="article-tag bg-matcha/20 text-matcha rounded-full tag-style font-bold">Mathematics</span>
+                    <span class="article-tag bg-matcha/20 text-matcha rounded-full tag-style font-bold">AI Ethics</span>
+                    <span class="article-tag bg-linen-gray/20 text-linen-gray rounded-full tag-style font-bold">Quantum Computing</span>
+                    <span class="article-tag bg-matcha/20 text-matcha rounded-full tag-style font-bold">Neural Networks</span>
+                    <span class="article-tag bg-linen-gray/20 text-linen-gray rounded-full tag-style font-bold">Cryptography</span>
+                    <span class="article-tag bg-matcha/20 text-matcha rounded-full tag-style font-bold">Smart Contracts</span>
+                    <span class="article-tag bg-matcha/20 text-matcha rounded-full tag-style font-bold">Deep Learning</span>
+                    <span class="article-tag bg-linen-gray/20 text-linen-gray rounded-full tag-style font-bold">Web3</span>
+                    
+                    <!-- AI相关标签 -->
+                    <span class="article-tag bg-matcha/20 text-matcha rounded-full tag-style font-bold">Natural Language Processing</span>
+                    <span class="article-tag bg-linen-gray/20 text-linen-gray rounded-full tag-style font-bold">Computer Vision</span>
+                    <span class="article-tag bg-matcha/20 text-matcha rounded-full tag-style font-bold">Reinforcement Learning</span>
+                    <span class="article-tag bg-linen-gray/20 text-linen-gray rounded-full tag-style font-bold">Generative Models</span>
+                    <span class="article-tag bg-matcha/20 text-matcha rounded-full tag-style font-bold">Transformers</span>
+                    <span class="article-tag bg-linen-gray/20 text-linen-gray rounded-full tag-style font-bold">GANs</span>
+                    <span class="article-tag bg-matcha/20 text-matcha rounded-full tag-style font-bold">Diffusion Models</span>
+                    <span class="article-tag bg-linen-gray/20 text-linen-gray rounded-full tag-style font-bold">Large Language Models</span>
+                    <span class="article-tag bg-matcha/20 text-matcha rounded-full tag-style font-bold">Model Optimization</span>
+                    <span class="article-tag bg-linen-gray/20 text-linen-gray rounded-full tag-style font-bold">Transfer Learning</span>
+                    
+                    <!-- 区块链相关标签 -->
+                    <span class="article-tag bg-matcha/20 text-matcha rounded-full tag-style font-bold">Decentralized Finance</span>
+                    <span class="article-tag bg-linen-gray/20 text-linen-gray rounded-full tag-style font-bold">NFTs</span>
+                    <span class="article-tag bg-matcha/20 text-matcha rounded-full tag-style font-bold">Layer 2 Solutions</span>
+                    <span class="article-tag bg-linen-gray/20 text-linen-gray rounded-full tag-style font-bold">Consensus Algorithms</span>
+                    <span class="article-tag bg-matcha/20 text-matcha rounded-full tag-style font-bold">Interoperability</span>
+                    <span class="article-tag bg-linen-gray/20 text-linen-gray rounded-full tag-style font-bold">Proof of Work</span>
+                    <span class="article-tag bg-matcha/20 text-matcha rounded-full tag-style font-bold">Proof of Stake</span>
+                    <span class="article-tag bg-linen-gray/20 text-linen-gray rounded-full tag-style font-bold">Blockchain Security</span>
+                    <span class="article-tag bg-matcha/20 text-matcha rounded-full tag-style font-bold">Decentralized Identity</span>
+                    <span class="article-tag bg-linen-gray/20 text-linen-gray rounded-full tag-style font-bold">DAO</span>
+                    
+                    <!-- 数学相关标签 -->
+                    <span class="article-tag bg-matcha/20 text-matcha rounded-full tag-style font-bold">Linear Algebra</span>
+                    <span class="article-tag bg-linen-gray/20 text-linen-gray rounded-full tag-style font-bold">Calculus</span>
+                    <span class="article-tag bg-matcha/20 text-matcha rounded-full tag-style font-bold">Probability</span>
+                    <span class="article-tag bg-linen-gray/20 text-linen-gray rounded-full tag-style font-bold">Statistics</span>
+                    <span class="article-tag bg-matcha/20 text-matcha rounded-full tag-style font-bold">Graph Theory</span>
+                    <span class="article-tag bg-linen-gray/20 text-linen-gray rounded-full tag-style font-bold">Topology</span>
+                    <span class="article-tag bg-matcha/20 text-matcha rounded-full tag-style font-bold">Number Theory</span>
+                    <span class="article-tag bg-linen-gray/20 text-linen-gray rounded-full tag-style font-bold">Optimization</span>
+                    <span class="article-tag bg-matcha/20 text-matcha rounded-full tag-style font-bold">Differential Equations</span>
+                    <span class="article-tag bg-linen-gray/20 text-linen-gray rounded-full tag-style font-bold">Combinatorics</span>
+                    
+                    <!-- 计算机科学相关标签 -->
+                    <span class="article-tag bg-matcha/20 text-matcha rounded-full tag-style font-bold">Algorithms</span>
+                    <span class="article-tag bg-linen-gray/20 text-linen-gray rounded-full tag-style font-bold">Data Structures</span>
+                    <span class="article-tag bg-matcha/20 text-matcha rounded-full tag-style font-bold">Distributed Systems</span>
+                    <span class="article-tag bg-linen-gray/20 text-linen-gray rounded-full tag-style font-bold">Operating Systems</span>
+                    <span class="article-tag bg-matcha/20 text-matcha rounded-full tag-style font-bold">Computer Networks</span>
+                    <span class="article-tag bg-linen-gray/20 text-linen-gray rounded-full tag-style font-bold">Database Systems</span>
+                    <span class="article-tag bg-matcha/20 text-matcha rounded-full tag-style font-bold">Cloud Computing</span>
+                    <span class="article-tag bg-linen-gray/20 text-linen-gray rounded-full tag-style font-bold">Edge Computing</span>
+                    <span class="article-tag bg-matcha/20 text-matcha rounded-full tag-style font-bold">Parallel Computing</span>
+                    <span class="article-tag bg-linen-gray/20 text-linen-gray rounded-full tag-style font-bold">Compilers</span>
+                    
+                    <!-- 数据科学相关标签 -->
+                    <span class="article-tag bg-matcha/20 text-matcha rounded-full tag-style font-bold">Data Science</span>
+                    <span class="article-tag bg-linen-gray/20 text-linen-gray rounded-full tag-style font-bold">Feature Engineering</span>
+                    <span class="article-tag bg-matcha/20 text-matcha rounded-full tag-style font-bold">Dimensionality Reduction</span>
+                    <span class="article-tag bg-linen-gray/20 text-linen-gray rounded-full tag-style font-bold">Model Evaluation</span>
+                    <span class="article-tag bg-matcha/20 text-matcha rounded-full tag-style font-bold">A/B Testing</span>
+                    <span class="article-tag bg-linen-gray/20 text-linen-gray rounded-full tag-style font-bold">Data Visualization</span>
+                    <span class="article-tag bg-matcha/20 text-matcha rounded-full tag-style font-bold">Big Data</span>
+                    <span class="article-tag bg-linen-gray/20 text-linen-gray rounded-full tag-style font-bold">Time Series Analysis</span>
+                    <span class="article-tag bg-matcha/20 text-matcha rounded-full tag-style font-bold">Anomaly Detection</span>
+                    <span class="article-tag bg-linen-gray/20 text-linen-gray rounded-full tag-style font-bold">Predictive Analytics</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 创建动态背景 - 确保9个气泡
+        function createBubbles() {
+            const container = document.getElementById('bubbles-container');
+            
+            const colors = [
+                'linear-gradient(135deg, #8AA899 0%, #8AA899 100%)',
+                'linear-gradient(135deg, #8AA899 0%, #8AA899 100%)'
+            ];
+            
+            container.innerHTML = '';
+            
+            // 确保正好9个气泡
+            for (let i = 0; i < 9; i++) {
+                const bubble = document.createElement('div');
+                bubble.classList.add('bubble');
+                
+                const size = Math.random() * 300 + 150;
+                const posX = Math.random() * 100;
+                const posY = Math.random() * 100;
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                const delay = Math.random() * 5;
+                const duration = Math.random() * 20 + 15;
+                
+                bubble.style.width = `${size}px`;
+                bubble.style.height = `${size}px`;
+                bubble.style.left = `${posX}%`;
+                bubble.style.top = `${posY}%`;
+                bubble.style.background = color;
+                bubble.style.opacity = 0.08 + Math.random() * 0.12;
+                bubble.style.animationDelay = `${delay}s`;
+                bubble.style.animationDuration = `${duration}s`;
+                bubble.style.animation = `floatBubble ${duration}s ease-in-out ${delay}s infinite`;
+                
+                container.appendChild(bubble);
+            }
+        }
+        
+        // 添加泡泡动画
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes floatBubble {
+                0% { transform: translate(0, 0) rotate(0deg); opacity: 0.1; }
+                25% { transform: translate(20px, -10px) rotate(5deg); opacity: 0.15; }
+                50% { transform: translate(40px, 0) rotate(0deg); opacity: 0.1; }
+                75% { transform: translate(20px, 10px) rotate(-5deg); opacity: 0.15; }
+                100% { transform: translate(0, 0) rotate(0deg); opacity: 0.1; }
+            }
+            .bubble {
+                position: absolute;
+                border-radius: 50%;
+                filter: blur(1px);
+                z-index: -1;
+            }
+        `;
+        document.head.appendChild(style);
+        
+        createBubbles();
+        
+        // 链接交互效果
+        document.querySelectorAll('a').forEach(link => {
+            link.addEventListener('mouseenter', function() {
+                this.classList.add('scale-105', 'transition-transform');
+            });
+            
+            link.addEventListener('mouseleave', function() {
+                this.classList.remove('scale-105');
+            });
+        });
+    </script>
+
+</body>
+</html>
