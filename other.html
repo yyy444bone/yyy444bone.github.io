@@ -1,0 +1,1229 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZIYI YANG | Other Articles</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        'black-custom': '#0A0A0A',
+                        'matcha': '#8AA899',
+                        'linen-gray': '#E0E0D1',
+                    },
+                    fontFamily: {
+                        sans: ['PingFang SC', 'Helvetica Neue', 'Arial', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            
+            .title-effect {
+                background-clip: text;
+                -webkit-background-clip: text;
+                color: transparent;
+                transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+                line-height: 0.85;
+                display: inline-block;
+                position: relative;
+                z-index: 10;
+            }
+            .line-height-tight {
+                line-height: 0.85 !important;
+            }
+            .title-effect:hover {
+                transform: translateY(-3px) scale(1.03);
+                text-shadow: 0 0 20px rgba(138, 168, 153, 0.6);
+            }
+            .card-hover {
+                transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            }
+            .card-hover:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 15px 20px -5px rgba(138, 168, 153, 0.1);
+            }
+            .nav-item {
+                transition: all 0.3s ease;
+            }
+            .nav-item:hover {
+                transform: translateX(-5px);
+            }
+            .social-icon {
+                transition: all 0.3s ease;
+            }
+            .social-icon:hover {
+                transform: translateY(-5px) scale(1.1);
+            }
+            .photo-frame {
+                transition: all 0.5s ease;
+                object-fit: cover;
+            }
+            .photo-frame:hover {
+                transform: scale(1.05);
+                box-shadow: 0 0 0 4px rgba(138, 168, 153, 0.3);
+            }
+            .article-tag {
+                transition: all 0.3s ease;
+                cursor: pointer;
+            }
+            .article-tag:hover {
+                transform: translateY(-3px) scale(1.05);
+                filter: brightness(1.2);
+            }
+            .floating {
+                animation: float 6s ease-in-out infinite;
+                transition: all 0.4s ease;
+                cursor: pointer;
+            }
+            .floating:hover {
+                transform: translateY(-20px) scale(1.1);
+                box-shadow: 0 10px 25px rgba(138, 168, 153, 0.3);
+            }
+            @keyframes float {
+                0% { transform: translateY(0px); }
+                50% { transform: translateY(-15px); }
+                100% { transform: translateY(0px); }
+            }
+            .floating-delay-1 {
+                animation-delay: 1s;
+            }
+            .floating-delay-2 {
+                animation-delay: 2s;
+            }
+            /* 姓名和介绍文本效果 */
+            .name-container {
+                position: relative;
+                overflow: hidden;
+                display: inline-block;
+                padding: 0 10px;
+                z-index: 10;
+            }
+            .name-container::before {
+                content: '';
+                position: absolute;
+                top: 50%;
+                left: -100%;
+                width: 100%;
+                height: 2px;
+                background: linear-gradient(90deg, transparent, #8AA899, transparent);
+                transform: translateY(-50%);
+                transition: left 0.8s ease;
+            }
+            .name-container:hover::before {
+                left: 100%;
+            }
+            .intro-text {
+                position: relative;
+                transition: all 0.5s ease;
+                display: inline-block;
+                padding: 5px 0;
+            }
+            .intro-text:hover {
+                letter-spacing: 0.5px;
+            }
+            .intro-text::after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 0;
+                height: 1px;
+                background: linear-gradient(to right, #8AA899, #E0E0D1);
+                transition: width 0.5s ease;
+            }
+            .intro-text:hover::after {
+                width: 100%;
+            }
+            /* 响应式瀑布流网格 */
+            .masonry-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+                grid-gap: 0.75rem;
+                grid-template-rows: masonry;
+                align-tracks: start;
+            }
+            
+            /* 交错卡片效果类 */
+            .stagger-1 {
+                transform: translateY(0) rotate(-0.5deg);
+            }
+            .stagger-2 {
+                transform: translateY(8px) rotate(0.5deg);
+            }
+            .stagger-3 {
+                transform: translateY(4px) rotate(-0.3deg);
+            }
+            .stagger-4 {
+                transform: translateY(12px) rotate(0.3deg);
+            }
+            @media (min-width: 768px) {
+                .masonry-grid {
+                    grid-template-columns: repeat(2, 1fr);
+                }
+            }
+            @media (min-width: 1024px) {
+                .masonry-grid {
+                    grid-template-columns: repeat(3, 1fr);
+                }
+            }
+            @media (min-width: 1280px) {
+                .masonry-grid {
+                    grid-template-columns: repeat(4, 1fr);
+                }
+            }
+            /* 筛选器交互效果 */
+            .filter-item {
+                transition: all 0.3s ease;
+                cursor: pointer;
+            }
+            .filter-item:hover, .filter-item.active {
+                background-color: rgba(138, 168, 153, 0.3);
+                transform: translateX(3px);
+            }
+        }
+    </style>
+    <style>
+        /* 隐藏滚动条 */
+        ::-webkit-scrollbar {
+            display: none;
+        }
+        html {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+            font-family: 'PingFang SC', 'Helvetica Neue', Arial, sans-serif;
+        }
+        /* 紧凑内容样式 */
+        .ultra-compact {
+            font-size: 0.65rem;
+            line-height: 1.1;
+            margin: 0;
+            padding: 0;
+        }
+        .tight-margin {
+            margin-top: 0.05rem !important;
+            margin-bottom: 0.15rem !important;
+        }
+        .tag-style {
+            font-size: 0.55rem !important;
+            padding: 0.05rem 0.25rem !important;
+            margin: 0.05rem !important;
+        }
+        .card-padding {
+            padding: 0.5rem !important;
+            display: flex;
+            flex-direction: column;
+            gap: 0.15rem;
+        }
+        .category-style {
+            font-size: 0.65rem !important;
+            margin-bottom: 0 !important;
+        }
+        .date-style {
+            font-size: 0.6rem !important;
+        }
+        .article-footer {
+            display: none;
+        }
+        /* 确保标题完整显示 */
+        .project-title {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 100%;
+        }
+        /* 筛选器容器样式 */
+        .filter-container {
+            padding: 0.5rem 0;
+            margin-bottom: 1rem;
+            border-top: 1px solid rgba(138, 168, 153, 0.2);
+            border-bottom: 1px solid rgba(138, 168, 153, 0.2);
+        }
+        .filter-item {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            margin: 0.25rem;
+            border-radius: 1rem;
+            font-size: 0.75rem;
+            background-color: rgba(138, 168, 153, 0.1);
+            color: #8AA899;
+        }
+        /* 标签颜色类 */
+        .tag-matcha {
+            background-color: rgba(138, 168, 153, 0.2) !important;
+            color: #8AA899 !important;
+        }
+        .tag-linen {
+            background-color: rgba(224, 224, 209, 0.2) !important;
+            color: #E0E0D1 !important;
+        }
+    </style>
+</head>
+<body class="bg-black-custom text-white min-h-screen overflow-x-hidden relative">
+    <!-- 动画背景气泡 - 高z-index容器确保可见性 -->
+    <div id="bubbles-container" class="fixed inset-0 w-full h-full pointer-events-none z-0"></div>
+
+    <div class="flex flex-col md:flex-row min-h-screen relative z-10">
+        <!-- 左侧部分：文章概览 -->
+        <div class="w-full md:w-3/4 p-4 md:p-6">
+            <!-- 作者信息和照片 - 居中的姓名 -->
+            <div class="mb-6 mt-2 flex flex-col md:flex-row items-center gap-4 md:gap-0">
+                <!-- 作者信息 - 居中显示 -->
+                <div class="flex-1 min-w-0 text-center md:text-left">
+                    <h1 class="text-[clamp(1.4rem,4vw,2.2rem)] font-bold mb-1 name-container mx-auto">
+                        <span class="title-effect bg-gradient-to-r from-matcha to-linen-gray">ZIYI YANG</span>
+                        <div class="text-base md:text-lg font-bold mt-0.25">子銥 · 楊</div>
+                    </h1>
+                    <!-- 两行介绍文本 -->
+                    <p class="text-sm md:text-base font-medium intro-text max-w-xl mt-2 mx-auto md:mx-0 leading-relaxed">
+                        EXPLORING THE INTERSECTIONS OF <span class="text-matcha">CS</span>, <span class="text-matcha">AI</span>,<br>
+                        <span class="text-matcha">BLOCKCHAIN</span>, AND <span class="text-linen-gray">MATH</span>
+                    </p>
+                    
+                    <!-- 联系图标 - 居中 -->
+                    <div class="flex gap-2 mt-3 justify-center md:justify-start">
+                        <a href="#" class="social-icon w-8 h-8 rounded-full bg-matcha/20 flex items-center justify-center text-matcha" aria-label="GitHub profile">
+                            <i class="fa fa-github"></i>
+                        </a>
+                        <a href="#" class="social-icon w-8 h-8 rounded-full bg-matcha/20 flex items-center justify-center text-matcha" aria-label="Twitter profile">
+                            <i class="fa fa-twitter"></i>
+                        </a>
+                        <a href="mailto:your-email@example.com" class="social-icon w-8 h-8 rounded-full bg-matcha/20 flex items-center justify-center text-matcha" aria-label="Email contact">
+                            <i class="fa fa-envelope"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- 带三个浮动气泡的照片 - 右侧 -->
+                <div class="flex justify-center items-center gap-[-15px] relative h-36 w-full md:w-auto mt-4 md:mt-0">
+                    <div class="floating w-18 h-18 rounded-full bg-matcha/20 p-1.5 flex flex-col justify-center items-center text-center shadow-[0_0_12px_rgba(138,168,153,0.7)] z-10">
+                        <p class="text-xs text-gray-300 mb-0.25 font-bold">Article Count</p>
+                        <p class="text-base font-bold text-gray-300">40</p>
+                    </div>
+                    
+                    <!-- 方形头像照片 -->
+                    <div class="photo-frame floating relative w-24 h-24 md:w-28 md:h-28 rounded-lg border-3 border-matcha/30 overflow-hidden z-20">
+                        <img src="https://picsum.photos/200/200" alt="Profile photo of ZIYI YANG" class="w-full h-full object-cover">
+                    </div>
+                    
+                    <div class="floating floating-delay-1 w-18 h-18 rounded-full bg-matcha/20 p-1.5 flex flex-col justify-center items-center text-center shadow-[0_0_12px_rgba(138,168,153,0.7)] z-10">
+                        <p class="text-xs text-gray-300 mb-0.25 font-bold">Total Words</p>
+                        <p class="text-base font-bold text-gray-300">120k</p>
+                    </div>
+                    
+                    <div class="floating floating-delay-2 w-18 h-18 rounded-full bg-matcha/20 p-1.5 flex flex-col justify-center items-center text-center shadow-[0_0_12px_rgba(138,168,153,0.7)] z-10">
+                        <p class="text-xs text-gray-300 mb-0.25 font-bold">Last Updated</p>
+                        <p class="text-xs font-bold text-gray-300">2023.08.05</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 内容导航 -->
+            <div class="mb-5 flex flex-wrap gap-4">
+                <a href="#" class="nav-item flex items-center gap-1.5 text-base font-bold text-gray-400 group hover:text-white">
+                    <span class="w-8 h-8 rounded-full bg-gradient-to-r from-matcha to-linen-gray flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <i class="fa fa-file-text-o"></i>
+                    </span>
+                    <span>Articles</span>
+                </a>
+                <a href="#" class="nav-item flex items-center gap-1.5 text-base font-bold text-gray-400 group hover:text-white">
+                    <span class="w-8 h-8 rounded-full bg-gradient-to-r from-matcha to-linen-gray flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <i class="fa fa-cubes"></i>
+                    </span>
+                    <span>Projects</span>
+                </a>
+            </div>
+
+            <!-- 文章筛选器 -->
+            <div class="filter-container">
+                <div class="flex flex-wrap">
+                    <!-- 为每个分类项添加了链接 -->
+                    <a href="/articles/all" class="filter-item">All</a>
+                    <a href="/articles/study" class="filter-item">Study-Related</a>
+                    <a href="/articles/work" class="filter-item">Work-Related</a>
+                    <a href="/articles/other" class="filter-item active">Other Types</a>
+                </div>
+            </div>
+
+            <!-- 文章列表标题 -->
+            <div class="mb-4">
+                <h2 class="text-base font-bold text-white mb-1">OTHER ARTICLES</h2>
+                <p class="text-gray-400 text-sm">Personal interests, creative works, and miscellaneous topics (40 articles)</p>
+            </div>
+
+            <!-- 文章列表 - 其他类型文章 -->
+            <div class="masonry-grid mb-8">
+                <!-- 文章 1 -->
+                <article class="bg-white/5 backdrop-blur-md rounded-lg card-padding border border-white/10 card-hover h-auto stagger-1">
+                    <div class="flex flex-wrap items-center gap-0.5 mb-0.5">
+                        <span class="article-tag tag-matcha rounded-full tag-style font-bold whitespace-nowrap">Philosophy</span>
+                        <span class="article-tag tag-linen rounded-full tag-style font-bold whitespace-nowrap">AI Ethics</span>
+                        <div class="text-gray-400 date-style flex items-center gap-1 ml-auto">
+                            <span>2023.08.05</span>
+                            <span><i class="fa fa-pencil"></i> 2.8k</span>
+                        </div>
+                    </div>
+                    <h2 class="text-xs md:text-sm font-bold tight-margin title-effect bg-gradient-to-r from-matcha to-linen-gray line-height-tight">
+                        <a href="#" class="hover:underline">The Ethical Implications of Advanced AI Systems</a>
+                    </h2>
+                    <p class="text-gray-300 ultra-compact mt-0.5">Exploring philosophical questions around AI consciousness, responsibility, and the future relationship between humans and intelligent machines.</p>
+                </article>
+
+                <!-- 文章 2 -->
+                <article class="bg-white/5 backdrop-blur-md rounded-lg card-padding border border-white/10 card-hover h-auto stagger-2">
+                    <div class="flex flex-wrap items-center gap-0.5 mb-0.5">
+                        <span class="article-tag tag-matcha rounded-full tag-style font-bold whitespace-nowrap">Productivity</span>
+                        <span class="article-tag tag-linen rounded-full tag-style font-bold whitespace-nowrap">Time Management</span>
+                        <div class="text-gray-400 date-style flex items-center gap-1 ml-auto">
+                            <span>2023.07.15</span>
+                            <span><i class="fa fa-pencil"></i> 1.9k</span>
+                        </div>
+                    </div>
+                    <h2 class="text-xs md:text-sm font-bold tight-margin title-effect bg-gradient-to-r from-matcha to-linen-gray line-height-tight">
+                        <a href="#" class="hover:underline">Effective Time Management for Knowledge Workers</a>
+                    </h2>
+                    <p class="text-gray-300 ultra-compact mt-0.5">Practical strategies for managing distractions, prioritizing tasks, and maintaining focus in an age of constant digital interruptions.</p>
+                </article>
+
+                <!-- 文章 3 -->
+                <article class="bg-white/5 backdrop-blur-md rounded-lg card-padding border border-white/10 card-hover h-auto stagger-3">
+                    <div class="flex flex-wrap items-center gap-0.5 mb-0.5">
+                        <span class="article-tag tag-matcha rounded-full tag-style font-bold whitespace-nowrap">Health</span>
+                        <span class="article-tag tag-linen rounded-full tag-style font-bold whitespace-nowrap">Wellness</span>
+                        <div class="text-gray-400 date-style flex items-center gap-1 ml-auto">
+                            <span>2023.06.20</span>
+                            <span><i class="fa fa-pencil"></i> 2.3k</span>
+                        </div>
+                    </div>
+                    <h2 class="text-xs md:text-sm font-bold tight-margin title-effect bg-gradient-to-r from-matcha to-linen-gray line-height-tight">
+                        <a href="#" class="hover:underline">Maintaining Physical Health in a Sedentary Tech Career</a>
+                    </h2>
+                    <p class="text-gray-300 ultra-compact mt-0.5">Evidence-based approaches to staying healthy while working long hours at a computer, including exercise routines and ergonomic practices.</p>
+                </article>
+
+                <!-- 文章 4 -->
+                <article class="bg-white/5 backdrop-blur-md rounded-lg card-padding border border-white/10 card-hover h-auto stagger-4">
+                    <div class="flex flex-wrap items-center gap-0.5 mb-0.5">
+                        <span class="article-tag tag-matcha rounded-full tag-style font-bold whitespace-nowrap">Books</span>
+                        <span class="article-tag tag-linen rounded-full tag-style font-bold whitespace-nowrap">Reviews</span>
+                        <div class="text-gray-400 date-style flex items-center gap-1 ml-auto">
+                            <span>2023.05.10</span>
+                            <span><i class="fa fa-pencil"></i> 2.1k</span>
+                        </div>
+                    </div>
+                    <h2 class="text-xs md:text-sm font-bold tight-margin title-effect bg-gradient-to-r from-matcha to-linen-gray line-height-tight">
+                        <a href="#" class="hover:underline">Must-Read Books for Aspiring Technologists</a>
+                    </h2>
+                    <p class="text-gray-300 ultra-compact mt-0.5">A curated list of influential books that shaped my perspective on technology, innovation, and the future of humanity.</p>
+                </article>
+
+                <!-- 文章 5 -->
+                <article class="bg-white/5 backdrop-blur-md rounded-lg card-padding border border-white/10 card-hover h-auto stagger-1">
+                    <div class="flex flex-wrap items-center gap-0.5 mb-0.5">
+                        <span class="article-tag tag-matcha rounded-full tag-style font-bold whitespace-nowrap">Travel</span>
+                        <span class="article-tag tag-linen rounded-full tag-style font-bold whitespace-nowrap">Culture</span>
+                        <div class="text-gray-400 date-style flex items-center gap-1 ml-auto">
+                            <span>2023.04.02</span>
+                            <span><i class="fa fa-pencil"></i> 2.9k</span>
+                        </div>
+                    </div>
+                    <h2 class="text-xs md:text-sm font-bold tight-margin title-effect bg-gradient-to-r from-matcha to-linen-gray line-height-tight">
+                        <a href="#" class="hover:underline">Digital Nomadism: Working While Exploring the World</a>
+                    </h2>
+                    <p class="text-gray-300 ultra-compact mt-0.5">Reflections on the lifestyle of working remotely while traveling, including practical tips for staying productive and maintaining work-life balance.</p>
+                </article>
+
+                <!-- 文章 6 -->
+                <article class="bg-white/5 backdrop-blur-md rounded-lg card-padding border border-white/10 card-hover h-auto stagger-2">
+                    <div class="flex flex-wrap items-center gap-0.5 mb-0.5">
+                        <span class="article-tag tag-matcha rounded-full tag-style font-bold whitespace-nowrap">Photography</span>
+                        <span class="article-tag tag-linen rounded-full tag-style font-bold whitespace-nowrap">Creativity</span>
+                        <div class="text-gray-400 date-style flex items-center gap-1 ml-auto">
+                            <span>2023.03.15</span>
+                            <span><i class="fa fa-pencil"></i> 2.4k</span>
+                        </div>
+                    </div>
+                    <h2 class="text-xs md:text-sm font-bold tight-margin title-effect bg-gradient-to-r from-matcha to-linen-gray line-height-tight">
+                        <a href="#" class="hover:underline">The Art of Visual Storytelling Through Photography</a>
+                    </h2>
+                    <p class="text-gray-300 ultra-compact mt-0.5">Exploring how composition, lighting, and subject selection can create powerful narratives in photography, with practical tips for improving your visual storytelling skills.</p>
+                </article>
+
+                <!-- 文章 7 -->
+                <article class="bg-white/5 backdrop-blur-md rounded-lg card-padding border border-white/10 card-hover h-auto stagger-3">
+                    <div class="flex flex-wrap items-center gap-0.5 mb-0.5">
+                        <span class="article-tag tag-matcha rounded-full tag-style font-bold whitespace-nowrap">Meditation</span>
+                        <span class="article-tag tag-linen rounded-full tag-style font-bold whitespace-nowrap">Mindfulness</span>
+                        <div class="text-gray-400 date-style flex items-center gap-1 ml-auto">
+                            <span>2023.02.28</span>
+                            <span><i class="fa fa-pencil"></i> 2.2k</span>
+                        </div>
+                    </div>
+                    <h2 class="text-xs md:text-sm font-bold tight-margin title-effect bg-gradient-to-r from-matcha to-linen-gray line-height-tight">
+                        <a href="#" class="hover:underline">Incorporating Mindfulness Practices into a Busy Tech Schedule</a>
+                    </h2>
+                    <p class="text-gray-300 ultra-compact mt-0.5">Simple mindfulness exercises and meditation techniques that can be integrated into a busy workday to reduce stress, improve focus, and enhance overall well-being.</p>
+                </article>
+
+                <!-- 文章 8 -->
+                <article class="bg-white/5 backdrop-blur-md rounded-lg card-padding border border-white/10 card-hover h-auto stagger-4">
+                    <div class="flex flex-wrap items-center gap-0.5 mb-0.5">
+                        <span class="article-tag tag-matcha rounded-full tag-style font-bold whitespace-nowrap">Finance</span>
+                        <span class="article-tag tag-linen rounded-full tag-style font-bold whitespace-nowrap">Investing</span>
+                        <div class="text-gray-400 date-style flex items-center gap-1 ml-auto">
+                            <span>2023.02.10</span>
+                            <span><i class="fa fa-pencil"></i> 2.6k</span>
+                        </div>
+                    </div>
+                    <h2 class="text-xs md:text-sm font-bold tight-margin title-effect bg-gradient-to-r from-matcha to-linen-gray line-height-tight">
+                        <a href="#" class="hover:underline">Financial Independence for Tech Professionals: A Roadmap</a>
+                    </h2>
+                    <p class="text-gray-300 ultra-compact mt-0.5">Strategies for saving, investing, and building wealth as a technology professional, with a focus on achieving financial independence and early retirement.</p>
+                </article>
+
+                <!-- 文章 9 -->
+                <article class="bg-white/5 backdrop-blur-md rounded-lg card-padding border border-white/10 card-hover h-auto stagger-1">
+                    <div class="flex flex-wrap items-center gap-0.5 mb-0.5">
+                        <span class="article-tag tag-matcha rounded-full tag-style font-bold whitespace-nowrap">Entrepreneurship</span>
+                        <span class="article-tag tag-linen rounded-full tag-style font-bold whitespace-nowrap">Startups</span>
+                        <div class="text-gray-400 date-style flex items-center gap-1 ml-auto">
+                            <span>2023.01.25</span>
+                            <span><i class="fa fa-pencil"></i> 2.8k</span>
+                        </div>
+                    </div>
+                    <h2 class="text-xs md:text-sm font-bold tight-margin title-effect bg-gradient-to-r from-matcha to-linen-gray line-height-tight">
+                        <a href="#" class="hover:underline">Lessons Learned from Launching a Tech Startup</a>
+                    </h2>
+                    <p class="text-gray-300 ultra-compact mt-0.5">Personal reflections on the challenges and successes of launching a technology startup, including insights on product development, fundraising, and team building.</p>
+                </article>
+
+                <!-- 文章 10 -->
+                <article class="bg-white/5 backdrop-blur-md rounded-lg card-padding border border-white/10 card-hover h-auto stagger-2">
+                    <div class="flex flex-wrap items-center gap-0.5 mb-0.5">
+                        <span class="article-tag tag-matcha rounded-full tag-style font-bold whitespace-nowrap">Art</span>
+                        <span class="article-tag tag-linen rounded-full tag-style font-bold whitespace-nowrap">Music</span>
+                        <div class="text-gray-400 date-style flex items-center gap-1 ml-auto">
+                            <span>2023.01.10</span>
+                            <span><i class="fa fa-pencil"></i> 2.3k</span>
+                        </div>
+                    </div>
+                    <h2 class="text-xs md:text-sm font-bold tight-margin title-effect bg-gradient-to-r from-matcha to-linen-gray line-height-tight">
+                        <a href="#" class="hover:underline">The Intersection of Technology and Art: Creative Possibilities</a>
+                    </h2>
+                    <p class="text-gray-300 ultra-compact mt-0.5">Exploring how emerging technologies like AI, VR, and generative art are expanding the boundaries of creative expression and enabling new forms of artistic collaboration.</p>
+                </article>
+
+                <!-- 文章 11-40 (省略部分文章以节省空间) -->
+                <!-- 文章 11 -->
+                <article class="bg-white/5 backdrop-blur-md rounded-lg card-padding border border-white/10 card-hover h-auto stagger-3">
+                    <div class="flex flex-wrap items-center gap-0.5 mb-0.5">
+                        <span class="article-tag tag-matcha rounded-full tag-style font-bold whitespace-nowrap">Cooking</span>
+                        <span class="article-tag tag-linen rounded-full tag-style font-bold whitespace-nowrap">Food</span>
+                        <div class="text-gray-400 date-style flex items-center gap-1 ml-auto">
+                            <span>2022.12.22</span>
+                            <span><i class="fa fa-pencil"></i> 2.1k</span>
+                        </div>
+                    </div>
+                    <h2 class="text-xs md:text-sm font-bold tight-margin title-effect bg-gradient-to-r from-matcha to-linen-gray line-height-tight">
+                        <a href="#" class="hover:underline">Culinary Creativity: Exploring Global Flavors at Home</a>
+                    </h2>
+                    <p class="text-gray-300 ultra-compact mt-0.5">Tips for experimenting with international cuisines at home, discovering new flavor combinations, and developing your culinary skills as a hobby.</p>
+                </article>
+
+                <!-- 文章 12 -->
+                <article class="bg-white/5 backdrop-blur-md rounded-lg card-padding border border-white/10 card-hover h-auto stagger-4">
+                    <div class="flex flex-wrap items-center gap-0.5 mb-0.5">
+                        <span class="article-tag tag-matcha rounded-full tag-style font-bold whitespace-nowrap">Fitness</span>
+                        <span class="article-tag tag-linen rounded-full tag-style font-bold whitespace-nowrap">Nutrition</span>
+                        <div class="text-gray-400 date-style flex items-center gap-1 ml-auto">
+                            <span>2022.12.05</span>
+                            <span><i class="fa fa-pencil"></i> 2.5k</span>
+                        </div>
+                    </div>
+                    <h2 class="text-xs md:text-sm font-bold tight-margin title-effect bg-gradient-to-r from-matcha to-linen-gray line-height-tight">
+                        <a href="#" class="hover:underline">Optimizing Nutrition and Fitness for Mental Performance</a>
+                    </h2>
+                    <p class="text-gray-300 ultra-compact mt-0.5">How diet and exercise impact cognitive function, with practical recommendations for nutrition and workout routines that enhance mental clarity and productivity.</p>
+                </article>
+
+                <!-- 文章 13 -->
+                <article class="bg-white/5 backdrop-blur-md rounded-lg card-padding border border-white/10 card-hover h-auto stagger-1">
+                    <div class="flex flex-wrap items-center gap-0.5 mb-0.5">
+                        <span class="article-tag tag-matcha rounded-full tag-style font-bold whitespace-nowrap">Literature</span>
+                        <span class="article-tag tag-linen rounded-full tag-style font-bold whitespace-nowrap">Writing</span>
+                        <div class="text-gray-400 date-style flex items-center gap-1 ml-auto">
+                            <span>2022.11.20</span>
+                            <span><i class="fa fa-pencil"></i> 2.7k</span>
+                        </div>
+                    </div>
+                    <h2 class="text-xs md:text-sm font-bold tight-margin title-effect bg-gradient-to-r from-matcha to-linen-gray line-height-tight">
+                        <a href="#" class="hover:underline">The Art of Effective Writing for Technical Professionals</a>
+                    </h2>
+                    <p class="text-gray-300 ultra-compact mt-0.5">Strategies for improving technical writing skills, communicating complex ideas clearly, and creating documentation that is both informative and engaging.</p>
+                </article>
+
+                <!-- 文章 14 -->
+                <article class="bg-white/5 backdrop-blur-md rounded-lg card-padding border border-white/10 card-hover h-auto stagger-2">
+                    <div class="flex flex-wrap items-center gap-0.5 mb-0.5">
+                        <span class="article-tag tag-matcha rounded-full tag-style font-bold whitespace-nowrap">History</span>
+                        <span class="article-tag tag-linen rounded-full tag-style font-bold whitespace-nowrap">Technology</span>
+                        <div class="text-gray-400 date-style flex items-center gap-1 ml-auto">
+                            <span>2022.11.05</span>
+                            <span><i class="fa fa-pencil"></i> 2.4k</span>
+                        </div>
+                    </div>
+                    <h2 class="text-xs md:text-sm font-bold tight-margin title-effect bg-gradient-to-r from-matcha to-linen-gray line-height-tight">
+                        <a href="#" class="hover:underline">Lessons from Technological Revolutions Throughout History</a>
+                    </h2>
+                    <p class="text-gray-300 ultra-compact mt-0.5">Examining past technological revolutions and the societal changes they brought about, and drawing parallels to the current era of AI and automation.</p>
+                </article>
+
+                <!-- 文章 15 -->
+                <article class="bg-white/5 backdrop-blur-md rounded-lg card-padding border border-white/10 card-hover h-auto stagger-3">
+                    <div class="flex flex-wrap items-center gap-0.5 mb-0.5">
+                        <span class="article-tag tag-matcha rounded-full tag-style font-bold whitespace-nowrap">Psychology</span>
+                        <span class="article-tag tag-linen rounded-full tag-style font-bold whitespace-nowrap">Productivity</span>
+                        <div class="text-gray-400 date-style flex items-center gap-1 ml-auto">
+                            <span>2022.10.22</span>
+                            <span><i class="fa fa-pencil"></i> 2.3k</span>
+                        </div>
+                    </div>
+                    <h2 class="text-xs md:text-sm font-bold tight-margin title-effect bg-gradient-to-r from-matcha to-linen-gray line-height-tight">
+                        <a href="#" class="hover:underline">Understanding Procrastination: Psychological Insights and Solutions</a>
+                    </h2>
+                    <p class="text-gray-300 ultra-compact mt-0.5">Exploring the psychological roots of procrastination and evidence-based strategies for overcoming it, with a focus on practical techniques for tech professionals.</p>
+                </article>
+
+                <!-- 文章 16 -->
+                <article class="bg-white/5 backdrop-blur-md rounded-lg card-padding border border-white/10 card-hover h-auto stagger-4">
+                    <div class="flex flex-wrap items-center gap-0.5 mb-0.5">
+                        <span class="article-tag tag-matcha rounded-full tag-style font-bold whitespace-nowrap">Environment</span>
+                        <span class="article-tag tag-linen rounded-full tag-style font-bold whitespace-nowrap">Sustainability</span>
+                        <div class="text-gray-400 date-style flex items-center gap-1 ml-auto">
+                            <span>2022.10.08</span>
+                            <span><i class="fa fa-pencil"></i> 2.6k</span>
+                        </div>
+                    </div>
+                    <h2 class="text-xs md:text-sm font-bold tight-margin title-effect bg-gradient-to-r from-matcha to-linen-gray line-height-tight">
+                        <a href="#" class="hover:underline">Sustainable Living in a Digital Age: Balancing Technology and Environmental Consciousness</a>
+                    </h2>
+                    <p class="text-gray-300 ultra-compact mt-0.5">Practical ways to reduce your environmental footprint while living in a technology-dependent world, including eco-friendly tech choices and sustainable habits.</p>
+                </article>
+
+                <!-- 文章 17 -->
+                <article class="bg-white/5 backdrop-blur-md rounded-lg card-padding border border-white/10 card-hover h-auto stagger-1">
+                    <div class="flex flex-wrap items-center gap-0.5 mb-0.5">
+                        <span class="article-tag tag-matcha rounded-full tag-style font-bold whitespace-nowrap">Education</span>
+                        <span class="article-tag tag-linen rounded-full tag-style font-bold whitespace-nowrap">Learning</span>
+                        <div class="text-gray-400 date-style flex items-center gap-1 ml-auto">
+                            <span>2022.09.25</span>
+                            <span><i class="fa fa-pencil"></i> 2.2k</span>
+                        </div>
+                    </div>
+                    <h2 class="text-xs md:text-sm font-bold tight-margin title-effect bg-gradient-to-r from-matcha to-linen-gray line-height-tight">
+                        <a href="#" class="hover:underline">Effective Learning Strategies for Lifelong Growth in Tech</a>
+                    </h2>
+                    <p class="text-gray-300 ultra-compact mt-0.5">Evidence-based approaches to learning new technologies, developing expertise, and maintaining a growth mindset in a rapidly evolving field.</p>
+                </article>
+
+                <!-- 文章 18 -->
+                <article class="bg-white/5 backdrop-blur-md rounded-lg card-padding border border-white/10 card-hover h-auto stagger-2">
+                    <div class="flex flex-wrap items-center gap-0.5 mb-0.5">
+                        <span class="article-tag tag-matcha rounded-full tag-style font-bold whitespace-nowrap">Relationships</span>
+                        <span class="article-tag tag-linen rounded-full tag-style font-bold whitespace-nowrap">Communication</span>
+                        <div class="text-gray-400 date-style flex items-center gap-1 ml-auto">
+                            <span>2022.09.10</span>
+                            <span><i class="fa fa-pencil"></i> 2.4k</span>
+                        </div>
+                    </div>
+                    <h2 class="text-xs md:text-sm font-bold tight-margin title-effect bg-gradient-to-r from-matcha to-linen-gray line-height-tight">
+                        <a href="#" class="hover:underline">Building Strong Professional Relationships in Remote Teams</a>
+                    </h2>
+                    <p class="text-gray-300 ultra-compact mt-0.5">Strategies for fostering connection, trust, and effective communication in remote work environments, with a focus on building lasting professional relationships.</p>
+                </article>
+
+                <!-- 文章 19 -->
+                <article class="bg-white/5 backdrop-blur-md rounded-lg card-padding border border-white/10 card-hover h-auto stagger-3">
+                    <div class="flex flex-wrap items-center gap-0.5 mb-0.5">
+                        <span class="article-tag tag-matcha rounded-full tag-style font-bold whitespace-nowrap">Movies</span>
+                        <span class="article-tag tag-linen rounded-full tag-style font-bold whitespace-nowrap">Media</span>
+                        <div class="text-gray-400 date-style flex items-center gap-1 ml-auto">
+                            <span>2022.08.25</span>
+                            <span><i class="fa fa-pencil"></i> 2.1k</span>
+                        </div>
+                    </div>
+                    <h2 class="text-xs md:text-sm font-bold tight-margin title-effect bg-gradient-to-r from-matcha to-linen-gray line-height-tight">
+                        <a href="#" class="hover:underline">The Evolution of Technology in Science Fiction Cinema</a>
+                    </h2>
+                    <p class="text-gray-300 ultra-compact mt-0.5">Exploring how science fiction films have portrayed technology over time, and how these depictions have influenced public perception and even technological development.</p>
+                </article>
+
+                <!-- 文章 20 -->
+                <article class="bg-white/5 backdrop-blur-md rounded-lg card-padding border border-white/10 card-hover h-auto stagger-4">
+                    <div class="flex flex-wrap items-center gap-0.5 mb-0.5">
+                        <span class="article-tag tag-matcha rounded-full tag-style font-bold whitespace-nowrap">Gaming</span>
+                        <span class="article-tag tag-linen rounded-full tag-style font-bold whitespace-nowrap">Entertainment</span>
+                        <div class="text-gray-400 date-style flex items-center gap-1 ml-auto">
+                            <span>2022.08.10</span>
+                            <span><i class="fa fa-pencil"></i> 2.3k</span>
+                        </div>
+                    </div>
+                    <h2 class="text-xs md:text-sm font-bold tight-margin title-effect bg-gradient-to-r from-matcha to-linen-gray line-height-tight">
+                        <a href="#" class="hover:underline">The Impact of Video Games on Cognitive Development and Problem-Solving</a>
+                    </h2>
+                    <p class="text-gray-300 ultra-compact mt-0.5">Examining the cognitive benefits of video games, including improved problem-solving skills, spatial reasoning, and strategic thinking, as well as potential drawbacks.</p>
+                </article>
+
+                <!-- 文章 21 -->
+                <article class="bg-white/5 backdrop-blur-md rounded-lg card-padding border border-white/10 card-hover h-auto stagger-1">
+                    <div class="flex flex-wrap items-center gap-0.5 mb-0.5">
+                        <span class="article-tag tag-matcha rounded-full tag-style font-bold whitespace-nowrap">Fashion</span>
+                        <span class="article-tag tag-linen rounded-full tag-style font-bold whitespace-nowrap">Style</span>
+                        <div class="text-gray-400 date-style flex items-center gap-1 ml-auto">
+                            <span>2022.07.25</span>
+                            <span><i class="fa fa-pencil"></i> 2.0k</span>
+                        </div>
+                    </div>
+                    <h2 class="text-xs md:text-sm font-bold tight-margin title-effect bg-gradient-to-r from-matcha to-linen-gray line-height-tight">
+                        <a href="#" class="hover:underline">Personal Style for Tech Professionals: Balancing Comfort and Professionalism</a>
+                    </h2>
+                    <p class="text-gray-300 ultra-compact mt-0.5">Tips for developing a personal style that is both comfortable for long coding sessions and professional for meetings and presentations, with a focus on practicality and self-expression.</p>
+                </article>
+
+                <!-- 文章 22 -->
+                <article class="bg-white/5 backdrop-blur-md rounded-lg card-padding border border-white/10 card-hover h-auto stagger-2">
+                    <div class="flex flex-wrap items-center gap-0.5 mb-0.5">
+                        <span class="article-tag tag-matcha rounded-full tag-style font-bold whitespace-nowrap">Parenting</span>
+                        <span class="article-tag tag-linen rounded-full tag-style font-bold whitespace-nowrap">Family</span>
+                        <div class="text-gray-400 date-style flex items-center gap-1 ml-auto">
+                            <span>2022.07.10</span>
+                            <span><i class="fa fa-pencil"></i> 2.5k</span>
+                        </div>
+                    </div>
+                    <h2 class="text-xs md:text-sm font-bold tight-margin title-effect bg-gradient-to-r from-matcha to-linen-gray line-height-tight">
+                        <a href="#" class="hover:underline">Raising Digital Natives: Balancing Tech Use and Healthy Development</a>
+                    </h2>
+                    <p class="text-gray-300 ultra-compact mt-0.5">Practical advice for parents in the tech industry on setting boundaries around screen time, fostering healthy digital habits, and using technology as a tool for learning and connection.</p>
+                </article>
+
+                <!-- 文章 23 -->
+                <article class="bg-white/5 backdrop-blur-md rounded-lg card-padding border border-white/10 card-hover h-auto stagger-3">
+                    <div class="flex flex-wrap items-center gap-0.5 mb-0.5">
+                        <span class="article-tag tag-matcha rounded-full tag-style font-bold whitespace-nowrap">Language</span>
+                        <span class="article-tag tag-linen rounded-full tag-style font-bold whitespace-nowrap">Communication</span>
+                        <div class="text-gray-400 date-style flex items-center gap-1 ml-auto">
+                            <span>2022.06.25</span>
+                            <span><i class="fa fa-pencil"></i> 2.2k</span>
+                        </div>
+                    </div>
+                    <h2 class="text-xs md:text-sm font-bold tight-margin title-effect bg-gradient-to-r from-matcha to-linen-gray line-height-tight">
+                        <a href="#" class="hover:underline">The Benefits of Learning Multiple Programming Languages and Human Languages</a>
+                    </h2>
+                    <p class="text-gray-300 ultra-compact mt-0.5">Exploring how learning multiple programming languages enhances problem-solving abilities, and how learning human languages improves cognitive flexibility and cross-cultural communication.</p>
+                </article>
+
+                <!-- 文章 24 -->
+                <article class="bg-white/5 backdrop-blur-md rounded-lg card-padding border border-white/10 card-hover h-auto stagger-4">
+                    <div class="flex flex-wrap items-center gap-0.5 mb-0.5">
+                        <span class="article-tag tag-matcha rounded-full tag-style font-bold whitespace-nowrap">Mythology</span>
+                        <span class="article-tag tag-linen rounded-full tag-style font-bold whitespace-nowrap">Philosophy</span>
+                        <div class="text-gray-400 date-style flex items-center gap-1 ml-auto">
+                            <span>2022.06.10</span>
+                            <span><i class="fa fa-pencil"></i> 2.3k</span>
+                        </div>
+                    </div>
+                    <h2 class="text-xs md:text-sm font-bold tight-margin title-effect bg-gradient-to-r from-matcha to-linen-gray line-height-tight">
+                        <a href="#" class="hover:underline">Ancient Wisdom and Modern Technology: Finding Balance in a Digital Age</a>
+                    </h2>
+                    <p class="text-gray-300 ultra-compact mt-0.5">Drawing parallels between ancient philosophical traditions and contemporary challenges of technology overuse, and exploring how timeless wisdom can inform modern digital habits.</p>
+                </article>
+
+                <!-- 文章 25 -->
+                <article class="bg-white/5 backdrop-blur-md rounded-lg card-padding border border-white/10 card-hover h-auto stagger-1">
+                    <div class="flex flex-wrap items-center gap-0.5 mb-0.5">
+                        <span class="article-tag tag-matcha rounded-full tag-style font-bold whitespace-nowrap">Architecture</span>
+                        <span class="article-tag tag-linen rounded-full tag-style font-bold whitespace-nowrap">Design</span>
+                        <div class="text-gray-400 date-style flex items-center gap-1 ml-auto">
+                            <span>2022.05.25</span>
+                            <span><i class="fa fa-pencil"></i> 2.4k</span>
+                        </div>
+                    </div>
+                    <h2 class="text-xs md:text-sm font-bold tight-margin title-effect bg-gradient-to-r from-matcha to-linen-gray line-height-tight">
+                        <a href="#" class="hover:underline">The Influence of Architectural Principles on User Interface Design</a>
+                    </h2>
+                    <p class="text-gray-300 ultra-compact mt-0.5">Exploring how concepts from architecture, such as spatial organization, flow, and human-centered design, can be applied to create more intuitive and aesthetically pleasing digital interfaces.</p>
+                </article>
+
+                <!-- 文章 26 -->
+                <article class="bg-white/5 backdrop-blur-md rounded-lg card-padding border border-white/10 card-hover h-auto stagger-2">
+                    <div class="flex flex-wrap items-center gap-0.5 mb-0.5">
+                        <span class="article-tag tag-matcha rounded-full tag-style font-bold whitespace-nowrap">Astronomy</span>
+                        <span class="article-tag tag-linen rounded-full tag-style font-bold whitespace-nowrap">Science</span>
+                        <div class="text-gray-400 date-style flex items-center gap-1 ml-auto">
+                            <span>2022.05.10</span>
+                            <span><i class="fa fa-pencil"></i> 2.6k</span>
+                        </div>
+                    </div>
+                    <h2 class="text-xs md:text-sm font-bold tight-margin title-effect bg-gradient-to-r from-matcha to-linen-gray line-height-tight">
+                        <a href="#" class="hover:underline">The Intersection of Technology and Astronomy: Exploring the Cosmos</a>
+                    </h2>
+                    <p class="text-gray-300 ultra-compact mt-0.5">How advances in technology have revolutionized our understanding of the universe, from powerful telescopes to space exploration and data analysis techniques.</p>
+                </article>
+
+                <!-- 文章 27 -->
+                <article class="bg-white/5 backdrop-blur-md rounded-lg card-padding border border-white/10 card-hover h-auto stagger-3">
+                    <div class="flex flex-wrap items-center gap-0.5 mb-0.5">
+                        <span class="article-tag tag-matcha rounded-full tag-style font-bold whitespace-nowrap">Biology</span>
+                        <span class="article-tag tag-linen rounded-full tag-style font-bold whitespace-nowrap">Technology</span>
+                        <div class="text-gray-400 date-style flex items-center gap-1 ml-auto">
+                            <span>2022.04.25</span>
+                            <span><i class="fa fa-pencil"></i> 2.3k</span>
+                        </div>
+                    </div>
+                    <h2 class="text-xs md:text-sm font-bold tight-margin title-effect bg-gradient-to-r from-matcha to-linen-gray line-height-tight">
+                        <a href="#" class="hover:underline">Biohacking and Self-Experimentation: The Future of Human Enhancement?</a>
+                    </h2>
+                    <p class="text-gray-300 ultra-compact mt-0.5">Examining the growing trend of biohacking, from simple lifestyle modifications to more advanced technologies, and exploring the ethical implications of human enhancement.</p>
+                </article>
+
+                <!-- 文章 28 -->
+                <article class="bg-white/5 backdrop-blur-md rounded-lg card-padding border border-white/10 card-hover h-auto stagger-4">
+                    <div class="flex flex-wrap items-center gap-0.5 mb-0.5">
+                        <span class="article-tag tag-matcha rounded-full tag-style font-bold whitespace-nowrap">Music</span>
+                        <span class="article-tag tag-linen rounded-full tag-style font-bold whitespace-nowrap">Technology</span>
+                        <div class="text-gray-400 date-style flex items-center gap-1 ml-auto">
+                            <span>2022.04.10</span>
+                            <span><i class="fa fa-pencil"></i> 2.2k</span>
+                        </div>
+                    </div>
+                    <h2 class="text-xs md:text-sm font-bold tight-margin title-effect bg-gradient-to-r from-matcha to-linen-gray line-height-tight">
+                        <a href="#" class="hover:underline">The Evolution of Music Production in the Digital Age</a>
+                    </h2>
+                    <p class="text-gray-300 ultra-compact mt-0.5">How digital technology has transformed music creation, production, and distribution, democratizing access to tools and creating new possibilities for artistic expression.</p>
+                </article>
+
+                <!-- 文章 29 -->
+                <article class="bg-white/5 backdrop-blur-md rounded-lg card-padding border border-white/10 card-hover h-auto stagger-1">
+                    <div class="flex flex-wrap items-center gap-0.5 mb-0.5">
+                        <span class="article-tag tag-matcha rounded-full tag-style font-bold whitespace-nowrap">Ethics</span>
+                        <span class="article-tag tag-linen rounded-full tag-style font-bold whitespace-nowrap">Society</span>
+                        <div class="text-gray-400 date-style flex items-center gap-1 ml-auto">
+                            <span>2022.03.25</span>
+                            <span><i class="fa fa-pencil"></i> 2.5k</span>
+                        </div>
+                    </div>
+                    <h2 class="text-xs md:text-sm font-bold tight-margin title-effect bg-gradient-to-r from-matcha to-linen-gray line-height-tight">
+                        <a href="#" class="hover:underline">Navigating Ethical Dilemmas in a Technology-Driven World</a>
+                    </h2>
+                    <p class="text-gray-300 ultra-compact mt-0.5">Exploring common ethical challenges faced by tech professionals, including privacy concerns, algorithmic bias, and the societal impact of emerging technologies, with frameworks for ethical decision-making.</p>
+                </article>
+
+                <!-- 文章 30 -->
+                <article class="bg-white/5 backdrop-blur-md rounded-lg card-padding border border-white/10 card-hover h-auto stagger-2">
+                    <div class="flex flex-wrap items-center gap-0.5 mb-0.5">
+                        <span class="article-tag tag-matcha rounded-full tag-style font-bold whitespace-nowrap">Sports</span>
+                        <span class="article-tag tag-linen rounded-full tag-style font-bold whitespace-nowrap">Fitness</span>
+                        <div class="text-gray-400 date-style flex items-center gap-1 ml-auto">
+                            <span>2022.03.10</span>
+                            <span><i class="fa fa-pencil"></i> 2.1k</span>
+                        </div>
+                    </div>
+                    <h2 class="text-xs md:text-sm font-bold tight-margin title-effect bg-gradient-to-r from-matcha to-linen-gray line-height-tight">
+                        <a href="#" class="hover:underline">The Role of Technology in Modern Sports Performance and Analysis</a>
+                    </h2>
+                    <p class="text-gray-300 ultra-compact mt-0.5">How technology is transforming sports through advanced analytics, performance tracking, and training techniques, and the impact on athletes and competition.</p>
+                </article>
+
+                <!-- 文章 31 -->
+                <article class="bg-white/5 backdrop-blur-md rounded-lg card-padding border border-white/10 card-hover h-auto stagger-3">
+                    <div class="flex flex-wrap items-center gap-0.5 mb-0.5">
+                        <span class="article-tag tag-matcha rounded-full tag-style font-bold whitespace-nowrap">Politics</span>
+                        <span class="article-tag tag-linen rounded-full tag-style font-bold whitespace-nowrap">Society</span>
+                        <div class="text-gray-400 date-style flex items-center gap-1 ml-auto">
+                            <span>2022.02.25</span>
+                            <span><i class="fa fa-pencil"></i> 2.4k</span>
+                        </div>
+                    </div>
+                    <h2 class="text-xs md:text-sm font-bold tight-margin title-effect bg-gradient-to-r from-matcha to-linen-gray line-height-tight">
+                        <a href="#" class="hover:underline">The Impact of Social Media on Political Discourse and Democracy</a>
+                    </h2>
+                    <p class="text-gray-300 ultra-compact mt-0.5">Examining how social media platforms have transformed political communication, shaped public opinion, and influenced democratic processes around the world.</p>
+                </article>
+
+                <!-- 文章 32 -->
+                <article class="bg-white/5 backdrop-blur-md rounded-lg card-padding border border-white/10 card-hover h-auto stagger-4">
+                    <div class="flex flex-wrap items-center gap-0.5 mb-0.5">
+                        <span class="article-tag tag-matcha rounded-full tag-style font-bold whitespace-nowrap">Religion</span>
+                        <span class="article-tag tag-linen rounded-full tag-style font-bold whitespace-nowrap">Philosophy</span>
+                        <div class="text-gray-400 date-style flex items-center gap-1 ml-auto">
+                            <span>2022.02.10</span>
+                            <span><i class="fa fa-pencil"></i> 2.3k</span>
+                        </div>
+                    </div>
+                    <h2 class="text-xs md:text-sm font-bold tight-margin title-effect bg-gradient-to-r from-matcha to-linen-gray line-height-tight">
+                        <a href="#" class="hover:underline">Spirituality and Technology: Finding Meaning in a Digital World</a>
+                    </h2>
+                    <p class="text-gray-300 ultra-compact mt-0.5">Exploring how individuals maintain spiritual practices and find meaning in an increasingly digital world, and how technology can both support and hinder spiritual growth.</p>
+                </article>
+
+                <!-- 文章 33 -->
+                <article class="bg-white/5 backdrop-blur-md rounded-lg card-padding border border-white/10 card-hover h-auto stagger-1">
+                    <div class="flex flex-wrap items-center gap-0.5 mb-0.5">
+                        <span class="article-tag tag-matcha rounded-full tag-style font-bold whitespace-nowrap">Law</span>
+                        <span class="article-tag tag-linen rounded-full tag-style font-bold whitespace-nowrap">Technology</span>
+                        <div class="text-gray-400 date-style flex items-center gap-1 ml-auto">
+                            <span>2022.01.25</span>
+                            <span><i class="fa fa-pencil"></i> 2.5k</span>
+                        </div>
+                    </div>
+                    <h2 class="text-xs md:text-sm font-bold tight-margin title-effect bg-gradient-to-r from-matcha to-linen-gray line-height-tight">
+                        <a href="#" class="hover:underline">Emerging Legal Challenges in the Age of Artificial Intelligence</a>
+                    </h2>
+                    <p class="text-gray-300 ultra-compact mt-0.5">Examining how AI is challenging existing legal frameworks, from liability and intellectual property to privacy and human rights, and the need for new regulatory approaches.</p>
+                </article>
+
+                <!-- 文章 34 -->
+                <article class="bg-white/5 backdrop-blur-md rounded-lg card-padding border border-white/10 card-hover h-auto stagger-2">
+                    <div class="flex flex-wrap items-center gap-0.5 mb-0.5">
+                        <span class="article-tag tag-matcha rounded-full tag-style font-bold whitespace-nowrap">Economics</span>
+                        <span class="article-tag tag-linen rounded-full tag-style font-bold whitespace-nowrap">Technology</span>
+                        <div class="text-gray-400 date-style flex items-center gap-1 ml-auto">
+                            <span>2022.01.10</span>
+                            <span><i class="fa fa-pencil"></i> 2.4k</span>
+                        </div>
+                    </div>
+                    <h2 class="text-xs md:text-sm font-bold tight-margin title-effect bg-gradient-to-r from-matcha to-linen-gray line-height-tight">
+                        <a href="#" class="hover:underline">The Future of Work: Automation, AI, and Economic Transformation</a>
+                    </h2>
+                    <p class="text-gray-300 ultra-compact mt-0.5">Exploring how automation and AI are reshaping the job market, creating new economic opportunities, and challenging traditional notions of work and employment.</p>
+                </article>
+
+                <!-- 文章 35 -->
+                <article class="bg-white/5 backdrop-blur-md rounded-lg card-padding border border-white/10 card-hover h-auto stagger-3">
+                    <div class="flex flex-wrap items-center gap-0.5 mb-0.5">
+                        <span class="article-tag tag-matcha rounded-full tag-style font-bold whitespace-nowrap">History</span>
+                        <span class="article-tag tag-linen rounded-full tag-style font-bold whitespace-nowrap">Biography</span>
+                        <div class="text-gray-400 date-style flex items-center gap-1 ml-auto">
+                            <span>2021.12.25</span>
+                            <span><i class="fa fa-pencil"></i> 2.2k</span>
+                        </div>
+                    </div>
+                    <h2 class="text-xs md:text-sm font-bold tight-margin title-effect bg-gradient-to-r from-matcha to-linen-gray line-height-tight">
+                        <a href="#" class="hover:underline">Visionaries Who Shaped the Digital Age: Stories of Innovation</a>
+                    </h2>
+                    <p class="text-gray-300 ultra-compact mt-0.5">Profiles of influential figures who have shaped the technology industry, their innovations, and the lessons we can learn from their successes and failures.</p>
+                </article>
+
+                <!-- 文章 36 -->
+                <article class="bg-white/5 backdrop-blur-md rounded-lg card-padding border border-white/10 card-hover h-auto stagger-4">
+                    <div class="flex flex-wrap items-center gap-0.5 mb-0.5">
+                        <span class="article-tag tag-matcha rounded-full tag-style font-bold whitespace-nowrap">Education</span>
+                        <span class="article-tag tag-linen rounded-full tag-style font-bold whitespace-nowrap">Technology</span>
+                        <div class="text-gray-400 date-style flex items-center gap-1 ml-auto">
+                            <span>2021.12.10</span>
+                            <span><i class="fa fa-pencil"></i> 2.3k</span>
+                        </div>
+                    </div>
+                    <h2 class="text-xs md:text-sm font-bold tight-margin title-effect bg-gradient-to-r from-matcha to-linen-gray line-height-tight">
+                        <a href="#" class="hover:underline">The Promise and Challenges of Online Education</a>
+                    </h2>
+                    <p class="text-gray-300 ultra-compact mt-0.5">Examining the growth of online learning platforms, their effectiveness compared to traditional education, and the challenges of accessibility, engagement, and quality assurance.</p>
+                </article>
+
+                <!-- 文章 37 -->
+                <article class="bg-white/5 backdrop-blur-md rounded-lg card-padding border border-white/10 card-hover h-auto stagger-1">
+                    <div class="flex flex-wrap items-center gap-0.5 mb-0.5">
+                        <span class="article-tag tag-matcha rounded-full tag-style font-bold whitespace-nowrap">Psychology</span>
+                        <span class="article-tag tag-linen rounded-full tag-style font-bold whitespace-nowrap">Technology</span>
+                        <div class="text-gray-400 date-style flex items-center gap-1 ml-auto">
+                            <span>2021.11.25</span>
+                            <span><i class="fa fa-pencil"></i> 2.4k</span>
+                        </div>
+                    </div>
+                    <h2 class="text-xs md:text-sm font-bold tight-margin title-effect bg-gradient-to-r from-matcha to-linen-gray line-height-tight">
+                        <a href="#" class="hover:underline">The Psychological Impact of Social Media on Mental Health</a>
+                    </h2>
+                    <p class="text-gray-300 ultra-compact mt-0.5">Exploring the relationship between social media use and mental health, including both positive and negative effects, and strategies for maintaining healthy digital habits.</p>
+                </article>
+
+                <!-- 文章 38 -->
+                <article class="bg-white/5 backdrop-blur-md rounded-lg card-padding border border-white/10 card-hover h-auto stagger-2">
+                    <div class="flex flex-wrap items-center gap-0.5 mb-0.5">
+                        <span class="article-tag tag-matcha rounded-full tag-style font-bold whitespace-nowrap">Geography</span>
+                        <span class="article-tag tag-linen rounded-full tag-style font-bold whitespace-nowrap">Travel</span>
+                        <div class="text-gray-400 date-style flex items-center gap-1 ml-auto">
+                            <span>2021.11.10</span>
+                            <span><i class="fa fa-pencil"></i> 2.1k</span>
+                        </div>
+                    </div>
+                    <h2 class="text-xs md:text-sm font-bold tight-margin title-effect bg-gradient-to-r from-matcha to-linen-gray line-height-tight">
+                        <a href="#" class="hover:underline">Digital Tools for Exploring and Preserving Cultural Heritage</a>
+                    </h2>
+                    <p class="text-gray-300 ultra-compact mt-0.5">How digital technologies like 3D modeling, virtual reality, and crowdsourcing are being used to document, preserve, and make accessible cultural heritage sites and artifacts.</p>
+                </article>
+
+                <!-- 文章 39 -->
+                <article class="bg-white/5 backdrop-blur-md rounded-lg card-padding border border-white/10 card-hover h-auto stagger-3">
+                    <div class="flex flex-wrap items-center gap-0.5 mb-0.5">
+                        <span class="article-tag tag-matcha rounded-full tag-style font-bold whitespace-nowrap">Philosophy</span>
+                        <span class="article-tag tag-linen rounded-full tag-style font-bold whitespace-nowrap">Technology</span>
+                        <div class="text-gray-400 date-style flex items-center gap-1 ml-auto">
+                            <span>2021.10.25</span>
+                            <span><i class="fa fa-pencil"></i> 2.5k</span>
+                        </div>
+                    </div>
+                    <h2 class="text-xs md:text-sm font-bold tight-margin title-effect bg-gradient-to-r from-matcha to-linen-gray line-height-tight">
+                        <a href="#" class="hover:underline">The Philosophy of Technology: Understanding Our Relationship with Tools</a>
+                    </h2>
+                    <p class="text-gray-300 ultra-compact mt-0.5">Exploring philosophical perspectives on technology, from determinism to instrumentalism, and how these frameworks help us understand the complex relationship between humans and their tools.</p>
+                </article>
+
+                <!-- 文章 40 -->
+                <article class="bg-white/5 backdrop-blur-md rounded-lg card-padding border border-white/10 card-hover h-auto stagger-4">
+                    <div class="flex flex-wrap items-center gap-0.5 mb-0.5">
+                        <span class="article-tag tag-matcha rounded-full tag-style font-bold whitespace-nowrap">Future</span>
+                        <span class="article-tag tag-linen rounded-full tag-style font-bold whitespace-nowrap">Technology</span>
+                        <div class="text-gray-400 date-style flex items-center gap-1 ml-auto">
+                            <span>2021.10.10</span>
+                            <span><i class="fa fa-pencil"></i> 2.3k</span>
+                        </div>
+                    </div>
+                    <h2 class="text-xs md:text-sm font-bold tight-margin title-effect bg-gradient-to-r from-matcha to-linen-gray line-height-tight">
+                        <a href="#" class="hover:underline">Predicting the Next Decade of Technological Innovation</a>
+                    </h2>
+                    <p class="text-gray-300 ultra-compact mt-0.5">A forward-looking analysis of emerging technologies that are likely to shape the next decade, their potential impact on society, and the skills needed to thrive in this changing landscape.</p>
+                </article>
+            </div>
+        </div>
+
+        <!-- 右侧部分：导航和标签 -->
+        <div class="w-full md:w-1/4 bg-white/5 backdrop-blur-md border-l border-white/10 p-4 flex flex-col">
+            <!-- 最小化版权信息 -->
+            <div class="mb-4 pb-3 border-b border-matcha/30 relative overflow-hidden group">
+                <div class="absolute inset-0 bg-gradient-to-r from-matcha/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div class="relative z-10">
+                    <h3 class="text-matcha font-bold mb-0.5 text-sm">ZIYI YANG</h3>
+                    <div class="flex items-center text-xs text-gray-500">
+                        <i class="fa fa-copyright mr-1"></i>
+                        <span>2025</span>
+                    </div>
+                </div>
+            </div>
+            
+            <nav class="mt-4 flex flex-col gap-4">
+                <a href="#" class="nav-item flex items-center gap-1.5 text-sm font-bold text-white group">
+                    <span class="w-8 h-8 rounded-full bg-gradient-to-r from-matcha to-matcha flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <i class="fa fa-home"></i>
+                    </span>
+                    <span>Home</span>
+                </a>
+                <a href="#" class="nav-item flex items-center gap-1.5 text-sm font-bold text-white group">
+                    <span class="w-8 h-8 rounded-full bg-gradient-to-r from-matcha to-matcha flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <i class="fa fa-file-text-o"></i>
+                    </span>
+                    <span>Articles</span>
+                </a>
+                <a href="#" class="nav-item flex items-center gap-1.5 text-sm font-bold text-gray-400 group hover:text-white">
+                    <span class="w-8 h-8 rounded-full bg-gradient-to-r from-matcha to-linen-gray flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <i class="fa fa-cubes"></i>
+                    </span>
+                    <span>Projects</span>
+                </a>
+            </nav>
+            
+            <!-- 交替颜色的标签云 -->
+            <div class="mt-8">
+                <h3 class="text-sm font-bold text-white mb-3 flex items-center">
+                    <i class="fa fa-tags text-matcha mr-2"></i>
+                    TAGS
+                </h3>
+                <div class="flex flex-wrap gap-1.5">
+                    <!-- 其他类型标签 -->
+                    <span class="article-tag tag-matcha rounded-full tag-style font-bold">Philosophy</span>
+                    <span class="article-tag tag-linen rounded-full tag-style font-bold">AI Ethics</span>
+                    <span class="article-tag tag-matcha rounded-full tag-style font-bold">Productivity</span>
+                    <span class="article-tag tag-linen rounded-full tag-style font-bold">Time Management</span>
+                    <span class="article-tag tag-matcha rounded-full tag-style font-bold">Health</span>
+                    <span class="article-tag tag-linen rounded-full tag-style font-bold">Wellness</span>
+                    <span class="article-tag tag-matcha rounded-full tag-style font-bold">Books</span>
+                    <span class="article-tag tag-linen rounded-full tag-style font-bold">Reviews</span>
+                    <span class="article-tag tag-matcha rounded-full tag-style font-bold">Travel</span>
+                    <span class="article-tag tag-linen rounded-full tag-style font-bold">Culture</span>
+                    <span class="article-tag tag-matcha rounded-full tag-style font-bold">Photography</span>
+                    <span class="article-tag tag-linen rounded-full tag-style font-bold">Creativity</span>
+                    <span class="article-tag tag-matcha rounded-full tag-style font-bold">Meditation</span>
+                    <span class="article-tag tag-linen rounded-full tag-style font-bold">Mindfulness</span>
+                    <span class="article-tag tag-matcha rounded-full tag-style font-bold">Finance</span>
+                    <span class="article-tag tag-linen rounded-full tag-style font-bold">Investing</span>
+                    <span class="article-tag tag-matcha rounded-full tag-style font-bold">Entrepreneurship</span>
+                    <span class="article-tag tag-linen rounded-full tag-style font-bold">Startups</span>
+                    <span class="article-tag tag-matcha rounded-full tag-style font-bold">Art</span>
+                    <span class="article-tag tag-matcha rounded-full tag-style font-bold">Philosophy</span>
+                    <span class="article-tag tag-linen rounded-full tag-style font-bold">AI Ethics</span>
+                    <span class="article-tag tag-matcha rounded-full tag-style font-bold">Productivity</span>
+                    <span class="article-tag tag-linen rounded-full tag-style font-bold">Time Management</span>
+                    <span class="article-tag tag-matcha rounded-full tag-style font-bold">Health</span>
+                    <span class="article-tag tag-linen rounded-full tag-style font-bold">Wellness</span>
+                    <span class="article-tag tag-matcha rounded-full tag-style font-bold">Books</span>
+                    <span class="article-tag tag-linen rounded-full tag-style font-bold">Reviews</span>
+                    <span class="article-tag tag-matcha rounded-full tag-style font-bold">Travel</span>
+                    <span class="article-tag tag-linen rounded-full tag-style font-bold">Culture</span>
+                    <span class="article-tag tag-matcha rounded-full tag-style font-bold">Photography</span>
+                    <span class="article-tag tag-linen rounded-full tag-style font-bold">Creativity</span>
+                    <span class="article-tag tag-matcha rounded-full tag-style font-bold">Meditation</span>
+                    <span class="article-tag tag-linen rounded-full tag-style font-bold">Mindfulness</span>
+                    <span class="article-tag tag-matcha rounded-full tag-style font-bold">Finance</span>
+                    <span class="article-tag tag-linen rounded-full tag-style font-bold">Investing</span>
+                    <span class="article-tag tag-matcha rounded-full tag-style font-bold">Entrepreneurship</span>
+                    <span class="article-tag tag-linen rounded-full tag-style font-bold">Startups</span>
+                    <span class="article-tag tag-matcha rounded-full tag-style font-bold">Art</span>
+                    <span class="article-tag tag-linen rounded-full tag-style font-bold">Music</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 气泡背景脚本（增强可见性） -->
+    <script>
+        // 创建气泡背景，带有多种保障措施确保可见性
+        function createBubbles() {
+            // 验证容器是否存在
+            const container = document.getElementById('bubbles-container');
+            
+            if (!container) {
+                console.error('未找到气泡容器！');
+                return;
+            }
+            
+            // 使用9个气泡，与主页匹配
+            const bubbleCount = 9;
+            
+            // 清除现有气泡，防止重复
+            container.innerHTML = '';
+            
+            for (let i = 0; i < bubbleCount; i++) {
+                const bubble = document.createElement('div');
+                
+                // 随机大小和位置，与主页匹配
+                const size = Math.random() * 300 + 150;
+                const posX = Math.random() * 100;
+                const posY = Math.random() * 100;
+                const delay = Math.random() * 5;
+                const duration = Math.random() * 20 + 15;
+                
+                // 设置气泡样式，确保可见性
+                // 使用与主页相同的气泡样式
+                const colors = [
+                    'linear-gradient(135deg, #8AA899 0%, #8AA899 100%)',
+                    'linear-gradient(135deg, #8AA899 0%, #8AA899 100%)'
+                ];
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                
+                bubble.style.cssText = `
+                    position: absolute !important;
+                    width: ${size}px !important;
+                    height: ${size}px !important;
+                    left: ${posX}% !important;
+                    top: ${posY}% !important;
+                    background: ${color} !important;
+                    border-radius: 50% !important;
+                    filter: blur(1px) !important;
+                    animation: floatBubble ${duration}s ease-in-out ${delay}s infinite !important;
+                    opacity: ${0.08 + Math.random() * 0.12} !important;
+                    z-index: -1 !important;
+                    pointer-events: none !important;
+                `;
+                
+                container.appendChild(bubble);
+            }
+            
+            // 强制浏览器立即渲染气泡
+            container.style.display = 'none';
+            container.offsetHeight; // 触发重排
+            container.style.display = 'block';
+        }
+        
+        // 添加与主页完全相同的浮动动画
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes floatBubble {
+                0% { transform: translate(0, 0) rotate(0deg); opacity: 0.1; }
+                25% { transform: translate(20px, -10px) rotate(5deg); opacity: 0.15; }
+                50% { transform: translate(40px, 0) rotate(0deg); opacity: 0.1; }
+                75% { transform: translate(20px, 10px) rotate(-5deg); opacity: 0.15; }
+                100% { transform: translate(0, 0) rotate(0deg); opacity: 0.1; }
+            }
+            .bubble {
+                position: absolute;
+                border-radius: 50%;
+                filter: blur(1px);
+                z-index: -1;
+            }
+        `;
+        document.head.appendChild(style);
+        
+        // 多种加载策略确保气泡显示
+        function initializeBubbles() {
+            try {
+                createBubbles();
+                // 验证气泡是否创建成功
+                const container = document.getElementById('bubbles-container');
+                if (container && container.children.length === 0) {
+                    throw new Error('气泡创建失败');
+                }
+            } catch (error) {
+                console.error('初始化气泡失败:', error);
+                // 短延迟后重试
+                setTimeout(createBubbles, 500);
+            }
+        }
+        
+        // 尝试使用多种事件加载气泡
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initializeBubbles);
+        } else {
+            initializeBubbles();
+        }
+        
+        // 最终安全网 - 页面加载后再试一次
+        window.addEventListener('load', () => {
+            const container = document.getElementById('bubbles-container');
+            if (container && container.children.length === 0) {
+                setTimeout(createBubbles, 1000);
+            }
+        });
+
+        // 筛选器交互
+        document.querySelectorAll('.filter-item').forEach(item => {
+            item.addEventListener('click', (e) => {
+                // 阻止链接默认跳转行为，实际应用中可根据需要移除
+                e.preventDefault();
+                
+                document.querySelectorAll('.filter-item').forEach(i => i.classList.remove('active'));
+                item.classList.add('active');
+            });
+        });
+
+        // 标签点击处理（无链接）
+        document.querySelectorAll('.article-tag').forEach(tag => {
+            tag.addEventListener('click', (e) => {
+                e.preventDefault();
+                // 仅视觉反馈
+                tag.style.transform = 'scale(1.1)';
+                setTimeout(() => {
+                    tag.style.transform = '';
+                }, 200);
+            });
+        });
+    </script>
+</body>
+</html>

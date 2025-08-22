@@ -1,0 +1,1210 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZIYI YANG | Study-Related Articles</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        'black-custom': '#0A0A0A',
+                        'matcha': '#8AA899',
+                        'linen-gray': '#E0E0D1',
+                    },
+                    fontFamily: {
+                        sans: ['PingFang SC', 'Helvetica Neue', 'Arial', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            
+            .title-effect {
+                background-clip: text;
+                -webkit-background-clip: text;
+                color: transparent;
+                transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+                line-height: 0.85;
+                display: inline-block;
+                position: relative;
+                z-index: 10;
+            }
+            .line-height-tight {
+                line-height: 0.85 !important;
+            }
+            .title-effect:hover {
+                transform: translateY(-3px) scale(1.03);
+                text-shadow: 0 0 20px rgba(138, 168, 153, 0.6);
+            }
+            .card-hover {
+                transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            }
+            .card-hover:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 15px 20px -5px rgba(138, 168, 153, 0.1);
+            }
+            .nav-item {
+                transition: all 0.3s ease;
+            }
+            .nav-item:hover {
+                transform: translateX(-5px);
+            }
+            .social-icon {
+                transition: all 0.3s ease;
+            }
+            .social-icon:hover {
+                transform: translateY(-5px) scale(1.1);
+            }
+            .photo-frame {
+                transition: all 0.5s ease;
+                object-fit: cover;
+            }
+            .photo-frame:hover {
+                transform: scale(1.05);
+                box-shadow: 0 0 0 4px rgba(138, 168, 153, 0.3);
+            }
+            .article-tag {
+                transition: all 0.3s ease;
+                cursor: pointer;
+            }
+            .article-tag:hover {
+                transform: translateY(-3px) scale(1.05);
+                filter: brightness(1.2);
+            }
+            .floating {
+                animation: float 6s ease-in-out infinite;
+                transition: all 0.4s ease;
+                cursor: pointer;
+            }
+            .floating:hover {
+                transform: translateY(-20px) scale(1.1);
+                box-shadow: 0 10px 25px rgba(138, 168, 153, 0.3);
+            }
+            @keyframes float {
+                0% { transform: translateY(0px); }
+                50% { transform: translateY(-15px); }
+                100% { transform: translateY(0px); }
+            }
+            .floating-delay-1 {
+                animation-delay: 1s;
+            }
+            .floating-delay-2 {
+                animation-delay: 2s;
+            }
+            /* 姓名和介绍文本效果 */
+            .name-container {
+                position: relative;
+                overflow: hidden;
+                display: inline-block;
+                padding: 0 10px;
+                z-index: 10;
+            }
+            .name-container::before {
+                content: '';
+                position: absolute;
+                top: 50%;
+                left: -100%;
+                width: 100%;
+                height: 2px;
+                background: linear-gradient(90deg, transparent, #8AA899, transparent);
+                transform: translateY(-50%);
+                transition: left 0.8s ease;
+            }
+            .name-container:hover::before {
+                left: 100%;
+            }
+            .intro-text {
+                position: relative;
+                transition: all 0.5s ease;
+                display: inline-block;
+                padding: 5px 0;
+            }
+            .intro-text:hover {
+                letter-spacing: 0.5px;
+            }
+            .intro-text::after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 0;
+                height: 1px;
+                background: linear-gradient(to right, #8AA899, #E0E0D1);
+                transition: width 0.5s ease;
+            }
+            .intro-text:hover::after {
+                width: 100%;
+            }
+            /* 响应式瀑布流网格 */
+            .masonry-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+                grid-gap: 0.75rem;
+                grid-template-rows: masonry;
+                align-tracks: start;
+            }
+            
+            /* 交错卡片效果类 */
+            .stagger-1 {
+                transform: translateY(0) rotate(-0.5deg);
+            }
+            .stagger-2 {
+                transform: translateY(8px) rotate(0.5deg);
+            }
+            .stagger-3 {
+                transform: translateY(4px) rotate(-0.3deg);
+            }
+            .stagger-4 {
+                transform: translateY(12px) rotate(0.3deg);
+            }
+            @media (min-width: 768px) {
+                .masonry-grid {
+                    grid-template-columns: repeat(2, 1fr);
+                }
+            }
+            @media (min-width: 1024px) {
+                .masonry-grid {
+                    grid-template-columns: repeat(3, 1fr);
+                }
+            }
+            @media (min-width: 1280px) {
+                .masonry-grid {
+                    grid-template-columns: repeat(4, 1fr);
+                }
+            }
+            /* 筛选器交互效果 */
+            .filter-item {
+                transition: all 0.3s ease;
+                cursor: pointer;
+            }
+            .filter-item:hover, .filter-item.active {
+                background-color: rgba(138, 168, 153, 0.3);
+                transform: translateX(3px);
+            }
+        }
+    </style>
+    <style>
+        /* 隐藏滚动条 */
+        ::-webkit-scrollbar {
+            display: none;
+        }
+        html {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+            font-family: 'PingFang SC', 'Helvetica Neue', Arial, sans-serif;
+        }
+        /* 紧凑内容样式 */
+        .ultra-compact {
+            font-size: 0.65rem;
+            line-height: 1.1;
+            margin: 0;
+            padding: 0;
+        }
+        .tight-margin {
+            margin-top: 0.05rem !important;
+            margin-bottom: 0.15rem !important;
+        }
+        .tag-style {
+            font-size: 0.55rem !important;
+            padding: 0.05rem 0.25rem !important;
+            margin: 0.05rem !important;
+        }
+        .card-padding {
+            padding: 0.5rem !important;
+            display: flex;
+            flex-direction: column;
+            gap: 0.15rem;
+        }
+        .category-style {
+            font-size: 0.65rem !important;
+            margin-bottom: 0 !important;
+        }
+        .date-style {
+            font-size: 0.6rem !important;
+        }
+        .article-footer {
+            display: none;
+        }
+        /* 确保标题完整显示 */
+        .project-title {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 100%;
+        }
+        /* 筛选器容器样式 */
+        .filter-container {
+            padding: 0.5rem 0;
+            margin-bottom: 1rem;
+            border-top: 1px solid rgba(138, 168, 153, 0.2);
+            border-bottom: 1px solid rgba(138, 168, 153, 0.2);
+        }
+        .filter-item {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            margin: 0.25rem;
+            border-radius: 1rem;
+            font-size: 0.75rem;
+            background-color: rgba(138, 168, 153, 0.1);
+            color: #8AA899;
+        }
+        /* 标签颜色类 */
+        .tag-matcha {
+            background-color: rgba(138, 168, 153, 0.2) !important;
+            color: #8AA899 !important;
+        }
+        .tag-linen {
+            background-color: rgba(224, 224, 209, 0.2) !important;
+            color: #E0E0D1 !important;
+        }
+    </style>
+</head>
+<body class="bg-black-custom text-white min-h-screen overflow-x-hidden relative">
+    <!-- 动画背景气泡 - 高z-index容器确保可见性 -->
+    <div id="bubbles-container" class="fixed inset-0 w-full h-full pointer-events-none z-0"></div>
+
+    <div class="flex flex-col md:flex-row min-h-screen relative z-10">
+        <!-- 左侧部分：文章概览 -->
+        <div class="w-full md:w-3/4 p-4 md:p-6">
+            <!-- 作者信息和照片 - 居中的姓名 -->
+            <div class="mb-6 mt-2 flex flex-col md:flex-row items-center gap-4 md:gap-0">
+                <!-- 作者信息 - 居中显示 -->
+                <div class="flex-1 min-w-0 text-center md:text-left">
+                    <h1 class="text-[clamp(1.4rem,4vw,2.2rem)] font-bold mb-1 name-container mx-auto">
+                        <span class="title-effect bg-gradient-to-r from-matcha to-linen-gray">ZIYI YANG</span>
+                        <div class="text-base md:text-lg font-bold mt-0.25">子銥 · 楊</div>
+                    </h1>
+                    <!-- 两行介绍文本 -->
+                    <p class="text-sm md:text-base font-medium intro-text max-w-xl mt-2 mx-auto md:mx-0 leading-relaxed">
+                        EXPLORING THE INTERSECTIONS OF <span class="text-matcha">CS</span>, <span class="text-matcha">AI</span>,<br>
+                        <span class="text-matcha">BLOCKCHAIN</span>, AND <span class="text-linen-gray">MATH</span>
+                    </p>
+                    
+                    <!-- 联系图标 - 居中 -->
+                    <div class="flex gap-2 mt-3 justify-center md:justify-start">
+                        <a href="#" class="social-icon w-8 h-8 rounded-full bg-matcha/20 flex items-center justify-center text-matcha" aria-label="GitHub profile">
+                            <i class="fa fa-github"></i>
+                        </a>
+                        <a href="#" class="social-icon w-8 h-8 rounded-full bg-matcha/20 flex items-center justify-center text-matcha" aria-label="Twitter profile">
+                            <i class="fa fa-twitter"></i>
+                        </a>
+                        <a href="mailto:your-email@example.com" class="social-icon w-8 h-8 rounded-full bg-matcha/20 flex items-center justify-center text-matcha" aria-label="Email contact">
+                            <i class="fa fa-envelope"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- 带三个浮动气泡的照片 - 右侧 -->
+                <div class="flex justify-center items-center gap-[-15px] relative h-36 w-full md:w-auto mt-4 md:mt-0">
+                    <div class="floating w-18 h-18 rounded-full bg-matcha/20 p-1.5 flex flex-col justify-center items-center text-center shadow-[0_0_12px_rgba(138,168,153,0.7)] z-10">
+                        <p class="text-xs text-gray-300 mb-0.25 font-bold">Article Count</p>
+                        <p class="text-base font-bold text-gray-300">40</p>
+                    </div>
+                    
+                    <!-- 方形头像照片 -->
+                    <div class="photo-frame floating relative w-24 h-24 md:w-28 md:h-28 rounded-lg border-3 border-matcha/30 overflow-hidden z-20">
+                        <img src="https://picsum.photos/200/200" alt="Profile photo of ZIYI YANG" class="w-full h-full object-cover">
+                    </div>
+                    
+                    <div class="floating floating-delay-1 w-18 h-18 rounded-full bg-matcha/20 p-1.5 flex flex-col justify-center items-center text-center shadow-[0_0_12px_rgba(138,168,153,0.7)] z-10">
+                        <p class="text-xs text-gray-300 mb-0.25 font-bold">Total Words</p>
+                        <p class="text-base font-bold text-gray-300">120k</p>
+                    </div>
+                    
+                    <div class="floating floating-delay-2 w-18 h-18 rounded-full bg-matcha/20 p-1.5 flex flex-col justify-center items-center text-center shadow-[0_0_12px_rgba(138,168,153,0.7)] z-10">
+                        <p class="text-xs text-gray-300 mb-0.25 font-bold">Last Updated</p>
+                        <p class="text-xs font-bold text-gray-300">2023.10.02</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 内容导航 -->
+            <div class="mb-5 flex flex-wrap gap-4">
+                <a href="#" class="nav-item flex items-center gap-1.5 text-base font-bold text-gray-400 group hover:text-white">
+                    <span class="w-8 h-8 rounded-full bg-gradient-to-r from-matcha to-linen-gray flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <i class="fa fa-file-text-o"></i>
+                    </span>
+                    <span>Articles</span>
+                </a>
+                <a href="#" class="nav-item flex items-center gap-1.5 text-base font-bold text-gray-400 group hover:text-white">
+                    <span class="w-8 h-8 rounded-full bg-gradient-to-r from-matcha to-linen-gray flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <i class="fa fa-cubes"></i>
+                    </span>
+                    <span>Projects</span>
+                </a>
+            </div>
+
+            <!-- 文章筛选器 -->
+            <div class="filter-container">
+                <div class="flex flex-wrap">
+                    <!-- 为每个分类项添加了链接 -->
+                    <a href="/articles/all" class="filter-item">All</a>
+                    <a href="/articles/study" class="filter-item active">Study-Related</a>
+                    <a href="/articles/work" class="filter-item">Work-Related</a>
+                    <a href="/articles/other" class="filter-item">Other Types</a>
+                </div>
+            </div>
+
+            <!-- 文章列表标题 -->
+            <div class="mb-4">
+                <h2 class="text-base font-bold text-white mb-1">STUDY-RELATED ARTICLES</h2>
+                <p class="text-gray-400 text-sm">Exploring academic concepts and learning materials (40 articles)</p>
+            </div>
+
+            <!-- 文章列表 - 学习相关文章 -->
+            <div class="masonry-grid mb-8">
+                <!-- 文章 1 -->
+                <article class="bg-white/5 backdrop-blur-md rounded-lg card-padding border border-white/10 card-hover h-auto stagger-1">
+                    <div class="flex flex-wrap items-center gap-0.5 mb-0.5">
+
+                        <span class="article-tag tag-matcha rounded-full tag-style font-bold whitespace-nowrap">Neural Networks</span>
+                        <span class="article-tag tag-linen rounded-full tag-style font-bold whitespace-nowrap">AI</span>
+                        <div class="text-gray-400 date-style flex items-center gap-1 ml-auto">
+                            <span>2023.10.02</span>
+                            <span><i class="fa fa-pencil"></i> 2.5k</span>
+                        </div>
+                    </div>
+                    <h2 class="text-xs md:text-sm font-bold tight-margin title-effect bg-gradient-to-r from-matcha to-linen-gray line-height-tight">
+                        <a href="#" class="hover:underline">The Evolution of Neural Networks in Modern AI Systems</a>
+                    </h2>
+                    <p class="text-gray-300 ultra-compact mt-0.5">Exploring how neural network architectures have evolved over the past decade and their impact on current AI capabilities.</p>
+                </article>
+
+                <!-- 文章 2 -->
+                <article class="bg-white/5 backdrop-blur-md rounded-lg card-padding border border-white/10 card-hover h-auto stagger-2">
+                    <div class="flex flex-wrap items-center gap-0.5 mb-0.5">
+                        <span class="article-tag tag-matcha rounded-full tag-style font-bold whitespace-nowrap">Math</span>
+                        <span class="article-tag tag-linen rounded-full tag-style font-bold whitespace-nowrap">Algorithms</span>
+                        <div class="text-gray-400 date-style flex items-center gap-1 ml-auto">
+                            <span>2023.09.10</span>
+                            <span><i class="fa fa-pencil"></i> 1.8k</span>
+                        </div>
+                    </div>
+                    <h2 class="text-xs md:text-sm font-bold tight-margin title-effect bg-gradient-to-r from-matcha to-linen-gray line-height-tight">
+                        <a href="#" class="hover:underline">Mathematical Foundations of Algorithmic Complexity</a>
+                    </h2>
+                    <p class="text-gray-300 ultra-compact mt-0.5">A deep dive into the mathematical principles that govern algorithm efficiency and computational complexity theory.</p>
+                </article>
+
+                <!-- 文章 3 -->
+                <article class="bg-white/5 backdrop-blur-md rounded-lg card-padding border border-white/10 card-hover h-auto stagger-3">
+                    <div class="flex flex-wrap items-center gap-0.5 mb-0.5">
+                        <span class="article-tag tag-matcha rounded-full tag-style font-bold whitespace-nowrap">Quantum</span>
+                        <span class="article-tag tag-linen rounded-full tag-style font-bold whitespace-nowrap">Cryptography</span>
+                        <div class="text-gray-400 date-style flex items-center gap-1 ml-auto">
+                            <span>2023.08.25</span>
+                            <span><i class="fa fa-pencil"></i> 4.5k</span>
+                        </div>
+                    </div>
+                    <h2 class="text-xs md:text-sm font-bold tight-margin title-effect bg-gradient-to-r from-matcha to-linen-gray line-height-tight">
+                        <a href="#" class="hover:underline">Quantum Computing: Implications for Cryptography</a>
+                    </h2>
+                    <p class="text-gray-300 ultra-compact mt-0.5">Exploring how quantum computing advancements could disrupt current cryptographic systems and what post-quantum solutions are being developed.</p>
+                </article>
+
+                <!-- 文章 4 -->
+                <article class="bg-white/5 backdrop-blur-md rounded-lg card-padding border border-white/10 card-hover h-auto stagger-4">
+                    <div class="flex flex-wrap items-center gap-0.5 mb-0.5">
+                        <span class="article-tag tag-matcha rounded-full tag-style font-bold whitespace-nowrap">Data Science</span>
+                        <span class="article-tag tag-linen rounded-full tag-style font-bold whitespace-nowrap">Feature Engineering</span>
+                        <div class="text-gray-400 date-style flex items-center gap-1 ml-auto">
+                            <span>2023.07.15</span>
+                            <span><i class="fa fa-pencil"></i> 2.7k</span>
+                        </div>
+                    </div>
+                    <h2 class="text-xs md:text-sm font-bold tight-margin title-effect bg-gradient-to-r from-matcha to-linen-gray line-height-tight">
+                        <a href="#" class="hover:underline">Feature Engineering for Machine Learning Models</a>
+                    </h2>
+                    <p class="text-gray-300 ultra-compact">Advanced techniques for creating, selecting, and transforming features to improve machine learning model performance.</p>
+                </article>
+
+                <!-- 文章 5 -->
+                <article class="bg-white/5 backdrop-blur-md rounded-lg card-padding border border-white/10 card-hover h-auto stagger-1">
+                    <div class="flex flex-wrap items-center gap-0.5 mb-0.5">
+                        <span class="article-tag tag-matcha rounded-full tag-style font-bold whitespace-nowrap">Transformers</span>
+                        <span class="article-tag tag-linen rounded-full tag-style font-bold whitespace-nowrap">NLP</span>
+                        <div class="text-gray-400 date-style flex items-center gap-1 ml-auto">
+                            <span>2023.06.30</span>
+                            <span><i class="fa fa-pencil"></i> 3.5k</span>
+                        </div>
+                    </div>
+                    <h2 class="text-xs md:text-sm font-bold tight-margin title-effect bg-gradient-to-r from-matcha to-linen-gray line-height-tight">
+                        <a href="#" class="hover:underline">Transformer Architectures: Beyond Language Processing</a>
+                    </h2>
+                    <p class="text-gray-300 ultra-compact">Exploring how transformer models are being applied beyond NLP to computer vision and other domains.</p>
+                </article>
+
+                <!-- 文章 6 -->
+                <article class="bg-white/5 backdrop-blur-md rounded-lg card-padding border border-white/10 card-hover h-auto stagger-2">
+                    <div class="flex flex-wrap items-center gap-0.5 mb-0.5">
+                        <span class="article-tag tag-matcha rounded-full tag-style font-bold whitespace-nowrap">Graph Theory</span>
+                        <span class="article-tag tag-linen rounded-full tag-style font-bold whitespace-nowrap">Networks</span>
+                        <div class="text-gray-400 date-style flex items-center gap-1 ml-auto">
+                            <span>2023.03.18</span>
+                            <span><i class="fa fa-pencil"></i> 1.6k</span>
+                        </div>
+                    </div>
+                    <h2 class="text-xs md:text-sm font-bold tight-margin title-effect bg-gradient-to-r from-matcha to-linen-gray line-height-tight">
+                        <a href="#" class="hover:underline">Graph Theory Applications in Network Analysis</a>
+                    </h2>
+                    <p class="text-gray-300 ultra-compact">How graph theory provides powerful tools for analyzing complex networks in social media and beyond.</p>
+                </article>
+
+                <!-- 文章 7 -->
+                <article class="bg-white/5 backdrop-blur-md rounded-lg card-padding border border-white/10 card-hover h-auto stagger-3">
+                    <div class="flex flex-wrap items-center gap-0.5 mb-0.5">
+                        <span class="article-tag tag-matcha rounded-full tag-style font-bold whitespace-nowrap">Quantum Mechanics</span>
+                        <span class="article-tag tag-linen rounded-full tag-style font-bold whitespace-nowrap">Computing</span>
+                        <div class="text-gray-400 date-style flex items-center gap-1 ml-auto">
+                            <span>2022.12.05</span>
+                            <span><i class="fa fa-pencil"></i> 4.2k</span>
+                        </div>
+                    </div>
+                    <h2 class="text-xs md:text-sm font-bold tight-margin title-effect bg-gradient-to-r from-matcha to-linen-gray line-height-tight">
+                        <a href="#" class="hover:underline">Quantum Supremacy: Current Status and Future Outlook</a>
+                    </h2>
+                    <p class="text-gray-300 ultra-compact">Examining the latest developments in quantum computing and when we might achieve true quantum supremacy.</p>
+                </article>
+
+                <!-- 文章 8 -->
+                <article class="bg-white/5 backdrop-blur-md rounded-lg card-padding border border-white/10 card-hover h-auto stagger-4">
+                    <div class="flex flex-wrap items-center gap-0.5 mb-0.5">
+                        <span class="article-tag tag-matcha rounded-full tag-style font-bold whitespace-nowrap">Statistics</span>
+                        <span class="article-tag tag-linen rounded-full tag-style font-bold whitespace-nowrap">User Behavior</span>
+                        <div class="text-gray-400 date-style flex items-center gap-1 ml-auto">
+                            <span>2023.05.28</span>
+                            <span><i class="fa fa-pencil"></i> 1.9k</span>
+                        </div>
+                    </div>
+                    <h2 class="text-xs md:text-sm font-bold tight-margin title-effect bg-gradient-to-r from-matcha to-linen-gray line-height-tight">
+                        <a href="#" class="hover:underline">Statistical Analysis of User Behavior Patterns</a>
+                    </h2>
+                    <p class="text-gray-300 ultra-compact">How topological methods are providing new insights into complex data structures and patterns.</p>
+                </article>
+
+                <!-- 文章 9 -->
+                <article class="bg-white/5 backdrop-blur-md rounded-lg card-padding border border-white/10 card-hover h-auto stagger-1">
+                    <div class="flex flex-wrap items-center gap-0.5 mb-0.5">
+                        <span class="article-tag tag-matcha rounded-full tag-style font-bold whitespace-nowrap">Computer Vision</span>
+                        <span class="article-tag tag-linen rounded-full tag-style font-bold whitespace-nowrap">Deep Learning</span>
+                        <div class="text-gray-400 date-style flex items-center gap-1 ml-auto">
+                            <span>2023.04.20</span>
+                            <span><i class="fa fa-pencil"></i> 2.3k</span>
+                        </div>
+                    </div>
+                    <h2 class="text-xs md:text-sm font-bold tight-margin title-effect bg-gradient-to-r from-matcha to-linen-gray line-height-tight">
+                        <a href="#" class="hover:underline">Object Detection with YOLO: A Comprehensive Guide</a>
+                    </h2>
+                    <p class="text-gray-300 ultra-compact">An in-depth exploration of the YOLO algorithm family for real-time object detection and its applications.</p>
+                </article>
+
+                <!-- 文章 10 -->
+                <article class="bg-white/5 backdrop-blur-md rounded-lg card-padding border border-white/10 card-hover h-auto stagger-2">
+                    <div class="flex flex-wrap items-center gap-0.5 mb-0.5">
+                        <span class="article-tag tag-matcha rounded-full tag-style font-bold whitespace-nowrap">Reinforcement Learning</span>
+                        <span class="article-tag tag-linen rounded-full tag-style font-bold whitespace-nowrap">Game Theory</span>
+                        <div class="text-gray-400 date-style flex items-center gap-1 ml-auto">
+                            <span>2023.03.25</span>
+                            <span><i class="fa fa-pencil"></i> 3.1k</span>
+                        </div>
+                    </div>
+                    <h2 class="text-xs md:text-sm font-bold tight-margin title-effect bg-gradient-to-r from-matcha to-linen-gray line-height-tight">
+                        <a href="#" class="hover:underline">Deep Reinforcement Learning for Game AI</a>
+                    </h2>
+                    <p class="text-gray-300 ultra-compact">How reinforcement learning algorithms are achieving superhuman performance in complex games like Go and Dota 2.</p>
+                </article>
+
+                <!-- 文章 11 -->
+                <article class="bg-white/5 backdrop-blur-md rounded-lg card-padding border border-white/10 card-hover h-auto stagger-3">
+                    <div class="flex flex-wrap items-center gap-0.5 mb-0.5">
+                        <span class="article-tag tag-matcha rounded-full tag-style font-bold whitespace-nowrap">NLP</span>
+                        <span class="article-tag tag-linen rounded-full tag-style font-bold whitespace-nowrap">Embeddings</span>
+                        <div class="text-gray-400 date-style flex items-center gap-1 ml-auto">
+                            <span>2023.02.18</span>
+                            <span><i class="fa fa-pencil"></i> 2.7k</span>
+                        </div>
+                    </div>
+                    <h2 class="text-xs md:text-sm font-bold tight-margin title-effect bg-gradient-to-r from-matcha to-linen-gray line-height-tight">
+                        <a href="#" class="hover:underline">Word Embeddings: From Word2Vec to BERT</a>
+                    </h2>
+                    <p class="text-gray-300 ultra-compact">Tracing the evolution of word representation techniques and their impact on natural language processing tasks.</p>
+                </article>
+
+                <!-- 文章 12 -->
+                <article class="bg-white/5 backdrop-blur-md rounded-lg card-padding border border-white/10 card-hover h-auto stagger-4">
+                    <div class="flex flex-wrap items-center gap-0.5 mb-0.5">
+                        <span class="article-tag tag-matcha rounded-full tag-style font-bold whitespace-nowrap">Linear Algebra</span>
+                        <span class="article-tag tag-linen rounded-full tag-style font-bold whitespace-nowrap">Matrix Theory</span>
+                        <div class="text-gray-400 date-style flex items-center gap-1 ml-auto">
+                            <span>2023.01.30</span>
+                            <span><i class="fa fa-pencil"></i> 2.0k</span>
+                        </div>
+                    </div>
+                    <h2 class="text-xs md:text-sm font-bold tight-margin title-effect bg-gradient-to-r from-matcha to-linen-gray line-height-tight">
+                        <a href="#" class="hover:underline">Matrix Decomposition Techniques in Machine Learning</a>
+                    </h2>
+                    <p class="text-gray-300 ultra-compact">Exploring how matrix decompositions like SVD and PCA enable dimensionality reduction and feature extraction.</p>
+                </article>
+
+                <!-- 文章 13 -->
+                <article class="bg-white/5 backdrop-blur-md rounded-lg card-padding border border-white/10 card-hover h-auto stagger-1">
+                    <div class="flex flex-wrap items-center gap-0.5 mb-0.5">
+                        <span class="article-tag tag-matcha rounded-full tag-style font-bold whitespace-nowrap">Calculus</span>
+                        <span class="article-tag tag-linen rounded-full tag-style font-bold whitespace-nowrap">Optimization</span>
+                        <div class="text-gray-400 date-style flex items-center gap-1 ml-auto">
+                            <span>2022.12.15</span>
+                            <span><i class="fa fa-pencil"></i> 2.4k</span>
+                        </div>
+                    </div>
+                    <h2 class="text-xs md:text-sm font-bold tight-margin title-effect bg-gradient-to-r from-matcha to-linen-gray line-height-tight">
+                        <a href="#" class="hover:underline">Optimization Algorithms for Deep Learning</a>
+                    </h2>
+                    <p class="text-gray-300 ultra-compact">Comparing gradient descent variants like Adam, RMSprop, and Momentum for training deep neural networks.</p>
+                </article>
+
+                <!-- 文章 14 -->
+                <article class="bg-white/5 backdrop-blur-md rounded-lg card-padding border border-white/10 card-hover h-auto stagger-2">
+                    <div class="flex flex-wrap items-center gap-0.5 mb-0.5">
+                        <span class="article-tag tag-matcha rounded-full tag-style font-bold whitespace-nowrap">Probability</span>
+                        <span class="article-tag tag-linen rounded-full tag-style font-bold whitespace-nowrap">Bayesian Inference</span>
+                        <div class="text-gray-400 date-style flex items-center gap-1 ml-auto">
+                            <span>2022.11.22</span>
+                            <span><i class="fa fa-pencil"></i> 3.2k</span>
+                        </div>
+                    </div>
+                    <h2 class="text-xs md:text-sm font-bold tight-margin title-effect bg-gradient-to-r from-matcha to-linen-gray line-height-tight">
+                        <a href="#" class="hover:underline">Bayesian Methods for Machine Learning</a>
+                    </h2>
+                    <p class="text-gray-300 ultra-compact">An introduction to Bayesian inference and its applications in building probabilistic machine learning models.</p>
+                </article>
+
+                <!-- 文章 15 -->
+                <article class="bg-white/5 backdrop-blur-md rounded-lg card-padding border border-white/10 card-hover h-auto stagger-3">
+                    <div class="flex flex-wrap items-center gap-0.5 mb-0.5">
+                        <span class="article-tag tag-matcha rounded-full tag-style font-bold whitespace-nowrap">Data Structures</span>
+                        <span class="article-tag tag-linen rounded-full tag-style font-bold whitespace-nowrap">Algorithms</span>
+                        <div class="text-gray-400 date-style flex items-center gap-1 ml-auto">
+                            <span>2022.10.18</span>
+                            <span><i class="fa fa-pencil"></i> 1.7k</span>
+                        </div>
+                    </div>
+                    <h2 class="text-xs md:text-sm font-bold tight-margin title-effect bg-gradient-to-r from-matcha to-linen-gray line-height-tight">
+                        <a href="#" class="hover:underline">Advanced Data Structures for Efficient Algorithms</a>
+                    </h2>
+                    <p class="text-gray-300 ultra-compact">Exploring complex data structures like segment trees, heaps, and hash maps and their algorithmic applications.</p>
+                </article>
+
+                <!-- 文章 16 -->
+                <article class="bg-white/5 backdrop-blur-md rounded-lg card-padding border border-white/10 card-hover h-auto stagger-4">
+                    <div class="flex flex-wrap items-center gap-0.5 mb-0.5">
+                        <span class="article-tag tag-matcha rounded-full tag-style font-bold whitespace-nowrap">Dimensionality Reduction</span>
+                        <span class="article-tag tag-linen rounded-full tag-style font-bold whitespace-nowrap">Visualization</span>
+                        <div class="text-gray-400 date-style flex items-center gap-1 ml-auto">
+                            <span>2022.09.30</span>
+                            <span><i class="fa fa-pencil"></i> 2.6k</span>
+                        </div>
+                    </div>
+                    <h2 class="text-xs md:text-sm font-bold tight-margin title-effect bg-gradient-to-r from-matcha to-linen-gray line-height-tight">
+                        <a href="#" class="hover:underline">t-SNE and UMAP: Techniques for High-Dimensional Data Visualization</a>
+                    </h2>
+                    <p class="text-gray-300 ultra-compact">Comparing modern dimensionality reduction techniques for visualizing complex high-dimensional datasets.</p>
+                </article>
+
+                <!-- 文章 17 -->
+                <article class="bg-white/5 backdrop-blur-md rounded-lg card-padding border border-white/10 card-hover h-auto stagger-1">
+                    <div class="flex flex-wrap items-center gap-0.5 mb-0.5">
+                        <span class="article-tag tag-matcha rounded-full tag-style font-bold whitespace-nowrap">Model Evaluation</span>
+                        <span class="article-tag tag-linen rounded-full tag-style font-bold whitespace-nowrap">Metrics</span>
+                        <div class="text-gray-400 date-style flex items-center gap-1 ml-auto">
+                            <span>2022.09.15</span>
+                            <span><i class="fa fa-pencil"></i> 2.1k</span>
+                        </div>
+                    </div>
+                    <h2 class="text-xs md:text-sm font-bold tight-margin title-effect bg-gradient-to-r from-matcha to-linen-gray line-height-tight">
+                        <a href="#" class="hover:underline">Beyond Accuracy: Comprehensive Model Evaluation Metrics</a>
+                    </h2>
+                    <p class="text-gray-300 ultra-compact">A detailed look at evaluation metrics beyond simple accuracy, including precision, recall, F1-score, and AUC-ROC.</p>
+                </article>
+
+                <!-- 文章 18 -->
+                <article class="bg-white/5 backdrop-blur-md rounded-lg card-padding border border-white/10 card-hover h-auto stagger-2">
+                    <div class="flex flex-wrap items-center gap-0.5 mb-0.5">
+                        <span class="article-tag tag-matcha rounded-full tag-style font-bold whitespace-nowrap">Computer Science</span>
+                        <span class="article-tag tag-linen rounded-full tag-style font-bold whitespace-nowrap">Theory</span>
+                        <div class="text-gray-400 date-style flex items-center gap-1 ml-auto">
+                            <span>2022.08.28</span>
+                            <span><i class="fa fa-pencil"></i> 2.8k</span>
+                        </div>
+                    </div>
+                    <h2 class="text-xs md:text-sm font-bold tight-margin title-effect bg-gradient-to-r from-matcha to-linen-gray line-height-tight">
+                        <a href="#" class="hover:underline">The P vs NP Problem: An Introduction</a>
+                    </h2>
+                    <p class="text-gray-300 ultra-compact">Exploring one of the most important open problems in computer science and its implications for algorithm design.</p>
+                </article>
+
+                <!-- 文章 19 -->
+                <article class="bg-white/5 backdrop-blur-md rounded-lg card-padding border border-white/10 card-hover h-auto stagger-3">
+                    <div class="flex flex-wrap items-center gap-0.5 mb-0.5">
+                        <span class="article-tag tag-matcha rounded-full tag-style font-bold whitespace-nowrap">Machine Learning</span>
+                        <span class="article-tag tag-linen rounded-full tag-style font-bold whitespace-nowrap">Ethics</span>
+                        <div class="text-gray-400 date-style flex items-center gap-1 ml-auto">
+                            <span>2022.08.10</span>
+                            <span><i class="fa fa-pencil"></i> 2.3k</span>
+                        </div>
+                    </div>
+                    <h2 class="text-xs md:text-sm font-bold tight-margin title-effect bg-gradient-to-r from-matcha to-linen-gray line-height-tight">
+                        <a href="#" class="hover:underline">Bias and Fairness in Machine Learning Models</a>
+                    </h2>
+                    <p class="text-gray-300 ultra-compact">Examining sources of bias in ML models and techniques for creating more fair and equitable AI systems.</p>
+                </article>
+
+                <!-- 文章 20 -->
+                <article class="bg-white/5 backdrop-blur-md rounded-lg card-padding border border-white/10 card-hover h-auto stagger-4">
+                    <div class="flex flex-wrap items-center gap-0.5 mb-0.5">
+                        <span class="article-tag tag-matcha rounded-full tag-style font-bold whitespace-nowrap">Robotics</span>
+                        <span class="article-tag tag-linen rounded-full tag-style font-bold whitespace-nowrap">Control Systems</span>
+                        <div class="text-gray-400 date-style flex items-center gap-1 ml-auto">
+                            <span>2022.07.25</span>
+                            <span><i class="fa fa-pencil"></i> 3.0k</span>
+                        </div>
+                    </div>
+                    <h2 class="text-xs md:text-sm font-bold tight-margin title-effect bg-gradient-to-r from-matcha to-linen-gray line-height-tight">
+                        <a href="#" class="hover:underline">Reinforcement Learning for Robot Control</a>
+                    </h2>
+                    <p class="text-gray-300 ultra-compact">How reinforcement learning is enabling robots to learn complex motor skills through trial and error.</p>
+                </article>
+
+                <!-- 文章 21 -->
+                <article class="bg-white/5 backdrop-blur-md rounded-lg card-padding border border-white/10 card-hover h-auto stagger-1">
+                    <div class="flex flex-wrap items-center gap-0.5 mb-0.5">
+                        <span class="article-tag tag-matcha rounded-full tag-style font-bold whitespace-nowrap">Mathematics</span>
+                        <span class="article-tag tag-linen rounded-full tag-style font-bold whitespace-nowrap">Number Theory</span>
+                        <div class="text-gray-400 date-style flex items-center gap-1 ml-auto">
+                            <span>2022.07.10</span>
+                            <span><i class="fa fa-pencil"></i> 2.2k</span>
+                        </div>
+                    </div>
+                    <h2 class="text-xs md:text-sm font-bold tight-margin title-effect bg-gradient-to-r from-matcha to-linen-gray line-height-tight">
+                        <a href="#" class="hover:underline">Applications of Number Theory in Cryptography</a>
+                    </h2>
+                    <p class="text-gray-300 ultra-compact">Exploring how concepts from number theory form the foundation of modern cryptographic systems.</p>
+                </article>
+
+                <!-- 文章 22 -->
+                <article class="bg-white/5 backdrop-blur-md rounded-lg card-padding border border-white/10 card-hover h-auto stagger-2">
+                    <div class="flex flex-wrap items-center gap-0.5 mb-0.5">
+                        <span class="article-tag tag-matcha rounded-full tag-style font-bold whitespace-nowrap">Machine Learning</span>
+                        <span class="article-tag tag-linen rounded-full tag-style font-bold whitespace-nowrap">Deployment</span>
+                        <div class="text-gray-400 date-style flex items-center gap-1 ml-auto">
+                            <span>2022.06.22</span>
+                            <span><i class="fa fa-pencil"></i> 2.5k</span>
+                        </div>
+                    </div>
+                    <h2 class="text-xs md:text-sm font-bold tight-margin title-effect bg-gradient-to-r from-matcha to-linen-gray line-height-tight">
+                        <a href="#" class="hover:underline">Model Deployment Strategies for Production Systems</a>
+                    </h2>
+                    <p class="text-gray-300 ultra-compact">Best practices for deploying machine learning models to production environments with reliability and scalability.</p>
+                </article>
+
+                <!-- 文章 23 -->
+                <article class="bg-white/5 backdrop-blur-md rounded-lg card-padding border border-white/10 card-hover h-auto stagger-3">
+                    <div class="flex flex-wrap items-center gap-0.5 mb-0.5">
+                        <span class="article-tag tag-matcha rounded-full tag-style font-bold whitespace-nowrap">Data Science</span>
+                        <span class="article-tag tag-linen rounded-full tag-style font-bold whitespace-nowrap">Visualization</span>
+                        <div class="text-gray-400 date-style flex items-center gap-1 ml-auto">
+                            <span>2022.06.08</span>
+                            <span><i class="fa fa-pencil"></i> 1.9k</span>
+                        </div>
+                    </div>
+                    <h2 class="text-xs md:text-sm font-bold tight-margin title-effect bg-gradient-to-r from-matcha to-linen-gray line-height-tight">
+                        <a href="#" class="hover:underline">Effective Data Visualization for Insight Discovery</a>
+                    </h2>
+                    <p class="text-gray-300 ultra-compact">Principles of data visualization and how to create visualizations that effectively communicate insights.</p>
+                </article>
+
+                <!-- 文章 24 -->
+                <article class="bg-white/5 backdrop-blur-md rounded-lg card-padding border border-white/10 card-hover h-auto stagger-4">
+                    <div class="flex flex-wrap items-center gap-0.5 mb-0.5">
+                        <span class="article-tag tag-matcha rounded-full tag-style font-bold whitespace-nowrap">Computer Vision</span>
+                        <span class="article-tag tag-linen rounded-full tag-style font-bold whitespace-nowrap">GANs</span>
+                        <div class="text-gray-400 date-style flex items-center gap-1 ml-auto">
+                            <span>2022.05.25</span>
+                            <span><i class="fa fa-pencil"></i> 3.3k</span>
+                        </div>
+                    </div>
+                    <h2 class="text-xs md:text-sm font-bold tight-margin title-effect bg-gradient-to-r from-matcha to-linen-gray line-height-tight">
+                        <a href="#" class="hover:underline">Generative Adversarial Networks: Creating Synthetic Data</a>
+                    </h2>
+                    <p class="text-gray-300 ultra-compact">Understanding how GANs work and their applications in generating realistic images, text, and other data types.</p>
+                </article>
+
+                <!-- 文章 25 -->
+                <article class="bg-white/5 backdrop-blur-md rounded-lg card-padding border border-white/10 card-hover h-auto stagger-1">
+                    <div class="flex flex-wrap items-center gap-0.5 mb-0.5">
+                        <span class="article-tag tag-matcha rounded-full tag-style font-bold whitespace-nowrap">Natural Language Processing</span>
+                        <span class="article-tag tag-linen rounded-full tag-style font-bold whitespace-nowrap">Sentiment Analysis</span>
+                        <div class="text-gray-400 date-style flex items-center gap-1 ml-auto">
+                            <span>2022.05.10</span>
+                            <span><i class="fa fa-pencil"></i> 2.4k</span>
+                        </div>
+                    </div>
+                    <h2 class="text-xs md:text-sm font-bold tight-margin title-effect bg-gradient-to-r from-matcha to-linen-gray line-height-tight">
+                        <a href="#" class="hover:underline">Advanced Sentiment Analysis Techniques</a>
+                    </h2>
+                    <p class="text-gray-300 ultra-compact">Exploring state-of-the-art approaches for determining sentiment in text data across different domains and languages.</p>
+                </article>
+
+                <!-- 文章 26 -->
+                <article class="bg-white/5 backdrop-blur-md rounded-lg card-padding border border-white/10 card-hover h-auto stagger-2">
+                    <div class="flex flex-wrap items-center gap-0.5 mb-0.5">
+                        <span class="article-tag tag-matcha rounded-full tag-style font-bold whitespace-nowrap">Mathematics</span>
+                        <span class="article-tag tag-linen rounded-full tag-style font-bold whitespace-nowrap">Topology</span>
+                        <div class="text-gray-400 date-style flex items-center gap-1 ml-auto">
+                            <span>2022.04.25</span>
+                            <span><i class="fa fa-pencil"></i> 2.7k</span>
+                        </div>
+                    </div>
+                    <h2 class="text-xs md:text-sm font-bold tight-margin title-effect bg-gradient-to-r from-matcha to-linen-gray line-height-tight">
+                        <a href="#" class="hover:underline">Topological Data Analysis: Beyond Traditional Statistics</a>
+                    </h2>
+                    <p class="text-gray-300 ultra-compact">How topological methods are providing new insights into complex data structures and patterns.</p>
+                </article>
+
+                <!-- 文章 27 -->
+                <article class="bg-white/5 backdrop-blur-md rounded-lg card-padding border border-white/10 card-hover h-auto stagger-3">
+                    <div class="flex flex-wrap items-center gap-0.5 mb-0.5">
+                        <span class="article-tag tag-matcha rounded-full tag-style font-bold whitespace-nowrap">Machine Learning</span>
+                        <span class="article-tag tag-linen rounded-full tag-style font-bold whitespace-nowrap">Transfer Learning</span>
+                        <div class="text-gray-400 date-style flex items-center gap-1 ml-auto">
+                            <span>2022.04.10</span>
+                            <span><i class="fa fa-pencil"></i> 2.2k</span>
+                        </div>
+                    </div>
+                    <h2 class="text-xs md:text-sm font-bold tight-margin title-effect bg-gradient-to-r from-matcha to-linen-gray line-height-tight">
+                        <a href="#" class="hover:underline">Transfer Learning: Applying Knowledge Across Domains</a>
+                    </h2>
+                    <p class="text-gray-300 ultra-compact">Strategies for leveraging pre-trained models to solve new problems with limited data.</p>
+                </article>
+
+                <!-- 文章 28 -->
+                <article class="bg-white/5 backdrop-blur-md rounded-lg card-padding border border-white/10 card-hover h-auto stagger-4">
+                    <div class="flex flex-wrap items-center gap-0.5 mb-0.5">
+                        <span class="article-tag tag-matcha rounded-full tag-style font-bold whitespace-nowrap">Quantum Computing</span>
+                        <span class="article-tag tag-linen rounded-full tag-style font-bold whitespace-nowrap">Algorithms</span>
+                        <div class="text-gray-400 date-style flex items-center gap-1 ml-auto">
+                            <span>2022.03.25</span>
+                            <span><i class="fa fa-pencil"></i> 3.1k</span>
+                        </div>
+                    </div>
+                    <h2 class="text-xs md:text-sm font-bold tight-margin title-effect bg-gradient-to-r from-matcha to-linen-gray line-height-tight">
+                        <a href="#" class="hover:underline">Quantum Algorithms for Machine Learning</a>
+                    </h2>
+                    <p class="text-gray-300 ultra-compact">Exploring how quantum computing could accelerate machine learning tasks and enable new algorithms.</p>
+                </article>
+
+                <!-- 文章 29 -->
+                <article class="bg-white/5 backdrop-blur-md rounded-lg card-padding border border-white/10 card-hover h-auto stagger-1">
+                    <div class="flex flex-wrap items-center gap-0.5 mb-0.5">
+                        <span class="article-tag tag-matcha rounded-full tag-style font-bold whitespace-nowrap">Data Science</span>
+                        <span class="article-tag tag-linen rounded-full tag-style font-bold whitespace-nowrap">Feature Selection</span>
+                        <div class="text-gray-400 date-style flex items-center gap-1 ml-auto">
+                            <span>2022.03.10</span>
+                            <span><i class="fa fa-pencil"></i> 1.8k</span>
+                        </div>
+                    </div>
+                    <h2 class="text-xs md:text-sm font-bold tight-margin title-effect bg-gradient-to-r from-matcha to-linen-gray line-height-tight">
+                        <a href="#" class="hover:underline">Feature Selection Techniques for High-Dimensional Data</a>
+                    </h2>
+                    <p class="text-gray-300 ultra-compact">Methods for identifying the most important features in datasets with thousands of variables.</p>
+                </article>
+
+                <!-- 文章 30 -->
+                <article class="bg-white/5 backdrop-blur-md rounded-lg card-padding border border-white/10 card-hover h-auto stagger-2">
+                    <div class="flex flex-wrap items-center gap-0.5 mb-0.5">
+                        <span class="article-tag tag-matcha rounded-full tag-style font-bold whitespace-nowrap">NLP</span>
+                        <span class="article-tag tag-linen rounded-full tag-style font-bold whitespace-nowrap">Text Generation</span>
+                        <div class="text-gray-400 date-style flex items-center gap-1 ml-auto">
+                            <span>2022.02.22</span>
+                            <span><i class="fa fa-pencil"></i> 2.9k</span>
+                        </div>
+                    </div>
+                    <h2 class="text-xs md:text-sm font-bold tight-margin title-effect bg-gradient-to-r from-matcha to-linen-gray line-height-tight">
+                        <a href="#" class="hover:underline">Advanced Text Generation with Large Language Models</a>
+                    </h2>
+                    <p class="text-gray-300 ultra-compact">Techniques for controlling and improving text generation using models like GPT-3 and beyond.</p>
+                </article>
+
+                <!-- 文章 31 -->
+                <article class="bg-white/5 backdrop-blur-md rounded-lg card-padding border border-white/10 card-hover h-auto stagger-3">
+                    <div class="flex flex-wrap items-center gap-0.5 mb-0.5">
+                        <span class="article-tag tag-matcha rounded-full tag-style font-bold whitespace-nowrap">Machine Learning</span>
+                        <span class="article-tag tag-linen rounded-full tag-style font-bold whitespace-nowrap">Time Series</span>
+                        <div class="text-gray-400 date-style flex items-center gap-1 ml-auto">
+                            <span>2022.02.08</span>
+                            <span><i class="fa fa-pencil"></i> 2.3k</span>
+                        </div>
+                    </div>
+                    <h2 class="text-xs md:text-sm font-bold tight-margin title-effect bg-gradient-to-r from-matcha to-linen-gray line-height-tight">
+                        <a href="#" class="hover:underline">Time Series Forecasting with Deep Learning</a>
+                    </h2>
+                    <p class="text-gray-300 ultra-compact">Applying recurrent neural networks and transformers to predict future values in time series data.</p>
+                </article>
+
+                <!-- 文章 32 -->
+                <article class="bg-white/5 backdrop-blur-md rounded-lg card-padding border border-white/10 card-hover h-auto stagger-4">
+                    <div class="flex flex-wrap items-center gap-0.5 mb-0.5">
+                        <span class="article-tag tag-matcha rounded-full tag-style font-bold whitespace-nowrap">Computer Vision</span>
+                        <span class="article-tag tag-linen rounded-full tag-style font-bold whitespace-nowrap">Segmentation</span>
+                        <div class="text-gray-400 date-style flex items-center gap-1 ml-auto">
+                            <span>2022.01.25</span>
+                            <span><i class="fa fa-pencil"></i> 2.6k</span>
+                        </div>
+                    </div>
+                    <h2 class="text-xs md:text-sm font-bold tight-margin title-effect bg-gradient-to-r from-matcha to-linen-gray line-height-tight">
+                        <a href="#" class="hover:underline">Image Segmentation with U-Net and Variants</a>
+                    </h2>
+                    <p class="text-gray-300 ultra-compact">Exploring U-Net architecture and its variants for precise image segmentation tasks in medical imaging and beyond.</p>
+                </article>
+
+                <!-- 文章 33 -->
+                <article class="bg-white/5 backdrop-blur-md rounded-lg card-padding border border-white/10 card-hover h-auto stagger-1">
+                    <div class="flex flex-wrap items-center gap-0.5 mb-0.5">
+                        <span class="article-tag tag-matcha rounded-full tag-style font-bold whitespace-nowrap">Mathematics</span>
+                        <span class="article-tag tag-linen rounded-full tag-style font-bold whitespace-nowrap">Graph Theory</span>
+                        <div class="text-gray-400 date-style flex items-center gap-1 ml-auto">
+                            <span>2022.01.10</span>
+                            <span><i class="fa fa-pencil"></i> 2.0k</span>
+                        </div>
+                    </div>
+                    <h2 class="text-xs md:text-sm font-bold tight-margin title-effect bg-gradient-to-r from-matcha to-linen-gray line-height-tight">
+                        <a href="#" class="hover:underline">Graph Neural Networks: An Introduction</a>
+                    </h2>
+                    <p class="text-gray-300 ultra-compact">How neural networks can be adapted to process graph-structured data for applications in social networks and recommendation systems.</p>
+                </article>
+
+                <!-- 文章 34 -->
+                <article class="bg-white/5 backdrop-blur-md rounded-lg card-padding border border-white/10 card-hover h-auto stagger-2">
+                    <div class="flex flex-wrap items-center gap-0.5 mb-0.5">
+                        <span class="article-tag tag-matcha rounded-full tag-style font-bold whitespace-nowrap">Machine Learning</span>
+                        <span class="article-tag tag-linen rounded-full tag-style font-bold whitespace-nowrap">Unsupervised Learning</span>
+                        <div class="text-gray-400 date-style flex items-center gap-1 ml-auto">
+                            <span>2021.12.25</span>
+                            <span><i class="fa fa-pencil"></i> 2.4k</span>
+                        </div>
+                    </div>
+                    <h2 class="text-xs md:text-sm font-bold tight-margin title-effect bg-gradient-to-r from-matcha to-linen-gray line-height-tight">
+                        <a href="#" class="hover:underline">Advanced Clustering Algorithms for Complex Data</a>
+                    </h2>
+                    <p class="text-gray-300 ultra-compact">Beyond k-means: exploring density-based, hierarchical, and spectral clustering techniques for complex datasets.</p>
+                </article>
+
+                <!-- 文章 35 -->
+                <article class="bg-white/5 backdrop-blur-md rounded-lg card-padding border border-white/10 card-hover h-auto stagger-3">
+                    <div class="flex flex-wrap items-center gap-0.5 mb-0.5">
+                        <span class="article-tag tag-matcha rounded-full tag-style font-bold whitespace-nowrap">Statistics</span>
+                        <span class="article-tag tag-linen rounded-full tag-style font-bold whitespace-nowrap">Experimental Design</span>
+                        <div class="text-gray-400 date-style flex items-center gap-1 ml-auto">
+                            <span>2021.12.10</span>
+                            <span><i class="fa fa-pencil"></i> 1.9k</span>
+                        </div>
+                    </div>
+                    <h2 class="text-xs md:text-sm font-bold tight-margin title-effect bg-gradient-to-r from-matcha to-linen-gray line-height-tight">
+                        <a href="#" class="hover:underline">Designing Experiments for Machine Learning</a>
+                    </h2>
+                    <p class="text-gray-300 ultra-compact">Statistical approaches to designing experiments that yield reliable insights about machine learning model performance.</p>
+                </article>
+
+                <!-- 文章 36 -->
+                <article class="bg-white/5 backdrop-blur-md rounded-lg card-padding border border-white/10 card-hover h-auto stagger-4">
+                    <div class="flex flex-wrap items-center gap-0.5 mb-0.5">
+                        <span class="article-tag tag-matcha rounded-full tag-style font-bold whitespace-nowrap">Natural Language Processing</span>
+                        <span class="article-tag tag-linen rounded-full tag-style font-bold whitespace-nowrap">Question Answering</span>
+                        <div class="text-gray-400 date-style flex items-center gap-1 ml-auto">
+                            <span>2021.11.25</span>
+                            <span><i class="fa fa-pencil"></i> 2.7k</span>
+                        </div>
+                    </div>
+                    <h2 class="text-xs md:text-sm font-bold tight-margin title-effect bg-gradient-to-r from-matcha to-linen-gray line-height-tight">
+                        <a href="#" class="hover:underline">Building Question-Answering Systems with BERT</a>
+                    </h2>
+                    <p class="text-gray-300 ultra-compact">How to fine-tune BERT and other transformer models for question-answering tasks across different domains.</p>
+                </article>
+
+                <!-- 文章 37 -->
+                <article class="bg-white/5 backdrop-blur-md rounded-lg card-padding border border-white/10 card-hover h-auto stagger-1">
+                    <div class="flex flex-wrap items-center gap-0.5 mb-0.5">
+                        <span class="article-tag tag-matcha rounded-full tag-style font-bold whitespace-nowrap">Computer Science</span>
+                        <span class="article-tag tag-linen rounded-full tag-style font-bold whitespace-nowrap">Parallel Computing</span>
+                        <div class="text-gray-400 date-style flex items-center gap-1 ml-auto">
+                            <span>2021.11.10</span>
+                            <span><i class="fa fa-pencil"></i> 2.3k</span>
+                        </div>
+                    </div>
+                    <h2 class="text-xs md:text-sm font-bold tight-margin title-effect bg-gradient-to-r from-matcha to-linen-gray line-height-tight">
+                        <a href="#" class="hover:underline">Parallel Algorithms for Machine Learning</a>
+                    </h2>
+                    <p class="text-gray-300 ultra-compact">Techniques for parallelizing machine learning algorithms to leverage multi-core processors and distributed systems.</p>
+                </article>
+
+                <!-- 文章 38 -->
+                <article class="bg-white/5 backdrop-blur-md rounded-lg card-padding border border-white/10 card-hover h-auto stagger-2">
+                    <div class="flex flex-wrap items-center gap-0.5 mb-0.5">
+                        <span class="article-tag tag-matcha rounded-full tag-style font-bold whitespace-nowrap">Data Science</span>
+                        <span class="article-tag tag-linen rounded-full tag-style font-bold whitespace-nowrap">Causal Inference</span>
+                        <div class="text-gray-400 date-style flex items-center gap-1 ml-auto">
+                            <span>2021.10.25</span>
+                            <span><i class="fa fa-pencil"></i> 2.6k</span>
+                        </div>
+                    </div>
+                    <h2 class="text-xs md:text-sm font-bold tight-margin title-effect bg-gradient-to-r from-matcha to-linen-gray line-height-tight">
+                        <a href="#" class="hover:underline">Causal Inference in Observational Data</a>
+                    </h2>
+                    <p class="text-gray-300 ultra-compact">Methods for determining causal relationships from observational data using techniques like propensity score matching.</p>
+                </article>
+
+                <!-- 文章 39 -->
+                <article class="bg-white/5 backdrop-blur-md rounded-lg card-padding border border-white/10 card-hover h-auto stagger-3">
+                    <div class="flex flex-wrap items-center gap-0.5 mb-0.5">
+                        <span class="article-tag tag-matcha rounded-full tag-style font-bold whitespace-nowrap">Machine Learning</span>
+                        <span class="article-tag tag-linen rounded-full tag-style font-bold whitespace-nowrap">Interpretability</span>
+                        <div class="text-gray-400 date-style flex items-center gap-1 ml-auto">
+                            <span>2021.10.10</span>
+                            <span><i class="fa fa-pencil"></i> 2.2k</span>
+                        </div>
+                    </div>
+                    <h2 class="text-xs md:text-sm font-bold tight-margin title-effect bg-gradient-to-r from-matcha to-linen-gray line-height-tight">
+                        <a href="#" class="hover:underline">Interpretable Machine Learning Models</a>
+                    </h2>
+                    <p class="text-gray-300 ultra-compact">Techniques for understanding and explaining the decisions made by complex machine learning models.</p>
+                </article>
+
+                <!-- 文章 40 -->
+                <article class="bg-white/5 backdrop-blur-md rounded-lg card-padding border border-white/10 card-hover h-auto stagger-4">
+                    <div class="flex flex-wrap items-center gap-0.5 mb-0.5">
+                        <span class="article-tag tag-matcha rounded-full tag-style font-bold whitespace-nowrap">Mathematics</span>
+                        <span class="article-tag tag-linen rounded-full tag-style font-bold whitespace-nowrap">Optimization</span>
+                        <div class="text-gray-400 date-style flex items-center gap-1 ml-auto">
+                            <span>2021.09.25</span>
+                            <span><i class="fa fa-pencil"></i> 2.4k</span>
+                        </div>
+                    </div>
+                    <h2 class="text-xs md:text-sm font-bold tight-margin title-effect bg-gradient-to-r from-matcha to-linen-gray line-height-tight">
+                        <a href="#" class="hover:underline">Convex Optimization for Machine Learning</a>
+                    </h2>
+                    <p class="text-gray-300 ultra-compact">An introduction to convex optimization theory and its applications in training machine learning models.</p>
+                </article>
+            </div>
+        </div>
+
+        <!-- 右侧部分：导航和标签 -->
+        <div class="w-full md:w-1/4 bg-white/5 backdrop-blur-md border-l border-white/10 p-4 flex flex-col">
+            <!-- 最小化版权信息 -->
+            <div class="mb-4 pb-3 border-b border-matcha/30 relative overflow-hidden group">
+                <div class="absolute inset-0 bg-gradient-to-r from-matcha/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div class="relative z-10">
+                    <h3 class="text-matcha font-bold mb-0.5 text-sm">ZIYI YANG</h3>
+                    <div class="flex items-center text-xs text-gray-500">
+                        <i class="fa fa-copyright mr-1"></i>
+                        <span>2025</span>
+                    </div>
+                </div>
+            </div>
+            
+            <nav class="mt-4 flex flex-col gap-4">
+                <a href="#" class="nav-item flex items-center gap-1.5 text-sm font-bold text-white group">
+                    <span class="w-8 h-8 rounded-full bg-gradient-to-r from-matcha to-matcha flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <i class="fa fa-home"></i>
+                    </span>
+                    <span>Home</span>
+                </a>
+                <a href="#" class="nav-item flex items-center gap-1.5 text-sm font-bold text-white group">
+                    <span class="w-8 h-8 rounded-full bg-gradient-to-r from-matcha to-matcha flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <i class="fa fa-file-text-o"></i>
+                    </span>
+                    <span>Articles</span>
+                </a>
+                <a href="#" class="nav-item flex items-center gap-1.5 text-sm font-bold text-gray-400 group hover:text-white">
+                    <span class="w-8 h-8 rounded-full bg-gradient-to-r from-matcha to-linen-gray flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <i class="fa fa-cubes"></i>
+                    </span>
+                    <span>Projects</span>
+                </a>
+            </nav>
+            
+            <!-- 交替颜色的标签云 -->
+            <div class="mt-8">
+                <h3 class="text-sm font-bold text-white mb-3 flex items-center">
+                    <i class="fa fa-tags text-matcha mr-2"></i>
+                    TAGS
+                </h3>
+                <div class="flex flex-wrap gap-1.5">
+                    <!-- 学习相关标签 -->
+                    <span class="article-tag tag-matcha rounded-full tag-style font-bold">Machine Learning</span>
+                    <span class="article-tag tag-linen rounded-full tag-style font-bold">Mathematics</span>
+                    <span class="article-tag tag-matcha rounded-full tag-style font-bold">Quantum Computing</span>
+                    <span class="article-tag tag-linen rounded-full tag-style font-bold">Neural Networks</span>
+                    <span class="article-tag tag-matcha rounded-full tag-style font-bold">Cryptography</span>
+                    <span class="article-tag tag-linen rounded-full tag-style font-bold">Natural Language Processing</span>
+                    <span class="article-tag tag-matcha rounded-full tag-style font-bold">Computer Vision</span>
+                    <span class="article-tag tag-linen rounded-full tag-style font-bold">Reinforcement Learning</span>
+                    <span class="article-tag tag-matcha rounded-full tag-style font-bold">Transformers</span>
+                    <span class="article-tag tag-linen rounded-full tag-style font-bold">Linear Algebra</span>
+                    <span class="article-tag tag-matcha rounded-full tag-style font-bold">Calculus</span>
+                    <span class="article-tag tag-linen rounded-full tag-style font-bold">Probability</span>
+                    <span class="article-tag tag-matcha rounded-full tag-style font-bold">Statistics</span>
+                    <span class="article-tag tag-linen rounded-full tag-style font-bold">Graph Theory</span>
+                    <span class="article-tag tag-matcha rounded-full tag-style font-bold">Algorithms</span>
+                    <span class="article-tag tag-linen rounded-full tag-style font-bold">Data Structures</span>
+                    <span class="article-tag tag-matcha rounded-full tag-style font-bold">Data Science</span>
+                    <span class="article-tag tag-linen rounded-full tag-style font-bold">Feature Engineering</span>
+                    <span class="article-tag tag-matcha rounded-full tag-style font-bold">Dimensionality Reduction</span>
+                    <span class="article-tag tag-linen rounded-full tag-style font-bold">Model Evaluation</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 气泡背景脚本（增强可见性） -->
+    <script>
+        // 创建气泡背景，带有多种保障措施确保可见性
+        function createBubbles() {
+            // 验证容器是否存在
+            const container = document.getElementById('bubbles-container');
+            
+            if (!container) {
+                console.error('未找到气泡容器！');
+                return;
+            }
+            
+            // 使用9个气泡，与主页匹配
+            const bubbleCount = 9;
+            
+            // 清除现有气泡，防止重复
+            container.innerHTML = '';
+            
+            for (let i = 0; i < bubbleCount; i++) {
+                const bubble = document.createElement('div');
+                
+                // 随机大小和位置，与主页匹配
+                const size = Math.random() * 300 + 150;
+                const posX = Math.random() * 100;
+                const posY = Math.random() * 100;
+                const delay = Math.random() * 5;
+                const duration = Math.random() * 20 + 15;
+                
+                // 设置气泡样式，确保可见性
+                // 使用与主页相同的气泡样式
+                const colors = [
+                    'linear-gradient(135deg, #8AA899 0%, #8AA899 100%)',
+                    'linear-gradient(135deg, #8AA899 0%, #8AA899 100%)'
+                ];
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                
+                bubble.style.cssText = `
+                    position: absolute !important;
+                    width: ${size}px !important;
+                    height: ${size}px !important;
+                    left: ${posX}% !important;
+                    top: ${posY}% !important;
+                    background: ${color} !important;
+                    border-radius: 50% !important;
+                    filter: blur(1px) !important;
+                    animation: floatBubble ${duration}s ease-in-out ${delay}s infinite !important;
+                    opacity: ${0.08 + Math.random() * 0.12} !important;
+                    z-index: -1 !important;
+                    pointer-events: none !important;
+                `;
+                
+                container.appendChild(bubble);
+            }
+            
+            // 强制浏览器立即渲染气泡
+            container.style.display = 'none';
+            container.offsetHeight; // 触发重排
+            container.style.display = 'block';
+        }
+        
+        // 添加与主页完全相同的浮动动画
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes floatBubble {
+                0% { transform: translate(0, 0) rotate(0deg); opacity: 0.1; }
+                25% { transform: translate(20px, -10px) rotate(5deg); opacity: 0.15; }
+                50% { transform: translate(40px, 0) rotate(0deg); opacity: 0.1; }
+                75% { transform: translate(20px, 10px) rotate(-5deg); opacity: 0.15; }
+                100% { transform: translate(0, 0) rotate(0deg); opacity: 0.1; }
+            }
+            .bubble {
+                position: absolute;
+                border-radius: 50%;
+                filter: blur(1px);
+                z-index: -1;
+            }
+        `;
+        document.head.appendChild(style);
+        
+        // 多种加载策略确保气泡显示
+        function initializeBubbles() {
+            try {
+                createBubbles();
+                // 验证气泡是否创建成功
+                const container = document.getElementById('bubbles-container');
+                if (container && container.children.length === 0) {
+                    throw new Error('气泡创建失败');
+                }
+            } catch (error) {
+                console.error('初始化气泡失败:', error);
+                // 短延迟后重试
+                setTimeout(createBubbles, 500);
+            }
+        }
+        
+        // 尝试使用多种事件加载气泡
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initializeBubbles);
+        } else {
+            initializeBubbles();
+        }
+        
+        // 最终安全网 - 页面加载后再试一次
+        window.addEventListener('load', () => {
+            const container = document.getElementById('bubbles-container');
+            if (container && container.children.length === 0) {
+                setTimeout(createBubbles, 1000);
+            }
+        });
+
+        // 筛选器交互
+        document.querySelectorAll('.filter-item').forEach(item => {
+            item.addEventListener('click', (e) => {
+                // 阻止链接默认跳转行为，实际应用中可根据需要移除
+                e.preventDefault();
+                
+                document.querySelectorAll('.filter-item').forEach(i => i.classList.remove('active'));
+                item.classList.add('active');
+            });
+        });
+
+        // 标签点击处理（无链接）
+        document.querySelectorAll('.article-tag').forEach(tag => {
+            tag.addEventListener('click', (e) => {
+                e.preventDefault();
+                // 仅视觉反馈
+                tag.style.transform = 'scale(1.1)';
+                setTimeout(() => {
+                    tag.style.transform = '';
+                }, 200);
+            });
+        });
+    </script>
+</body>
+</html>
