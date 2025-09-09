@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>yyy444</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        'black-custom': '#0A0A0A',
+                        'matcha': '#8AA899',
+                        'matcha-light': '#A4C0B2',
+                        'linen-gray': '#E0E0D1',
+                        'linen-dark': '#B8B8A8',
+                    },
+                    fontFamily: {
+                        sans: ['PingFang SC', 'Helvetica Neue', 'Arial', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            
+            .title-effect {
+                background-clip: text;
+                -webkit-background-clip: text;
+                color: transparent;
+            }
+            .card-hover {
+                transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            }
+            .card-hover:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 15px 20px -5px rgba(138, 168, 153, 0.1);
+            }
+            .photo-frame {
+                object-fit: cover;
+            }
+            .article-tag {
+                transition: all 0.3s ease;
+                cursor: pointer;
+                position: relative;
+                overflow: hidden;
+            }
+            .article-tag::after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 0;
+                height: 1px;
+                background-color: currentColor;
+                transition: width 0.3s ease;
+            }
+            .article-tag:hover {
+                transform: translateY(-2px);
+            }
+            .article-tag:hover::after {
+                width: 100%;
+            }
+            .timeline-dot {
+                transition: all 0.3s ease;
+            }
+            .timeline-item:hover .timeline-dot {
+                transform: scale(1.3);
+                box-shadow: 0 0 15px rgba(138, 168, 153, 0.5);
+            }
+            
+            .blockchain-tag {
+                transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+                cursor: pointer;
+                position: relative;
+                overflow: hidden;
+            }
+            .blockchain-tag::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: -100%;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+                transition: left 0.5s ease;
+            }
+            .blockchain-tag:hover {
+                transform: translateY(-2px) scale(1.05);
+                box-shadow: 0 8px 16px rgba(138, 168, 153, 0.2);
+            }
+            .blockchain-tag:hover::before {
+                left: 100%;
+            }
+            .blockchain-tag.active {
+                transform: scale(1.1);
+                box-shadow: 0 0 20px rgba(138, 168, 153, 0.4);
+            }
+            .tag-glow {
+                animation: tagGlow 2s ease-in-out infinite alternate;
+            }
+            @keyframes tagGlow {
+                0% { box-shadow: 0 0 5px rgba(138, 168, 153, 0.3); }
+                100% { box-shadow: 0 0 15px rgba(138, 168, 153, 0.6); }
+            }
+            .tag-pulse {
+                animation: tagPulse 1.5s ease-in-out infinite;
+            }
+            @keyframes tagPulse {
+                0%, 100% { transform: scale(1); }
+                50% { transform: scale(1.05); }
+            }
+        }
+    </style>
+    <style>
+        ::-webkit-scrollbar {
+            display: none;
+        }
+        html {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+            font-family: 'PingFang SC', 'Helvetica Neue', Arial, sans-serif;
+        }
+        .tag-style {
+            font-size: 0.7rem !important;
+            padding: 0.15rem 0.4rem !important;
+            margin: 0.15rem !important;
+            border-radius: 12px !important;
+            letter-spacing: 0.2px;
+        }
+        .timeline-container {
+            overflow-x: auto;
+            padding: 3rem 0;
+        }
+        .timeline-track {
+            position: relative;
+            min-height: 380px;
+            padding: 7rem 0 5rem;
+            text-align: center; 
+        }
+        .timeline-line {
+            position: absolute;
+            height: 2px;
+            background-color: rgba(138, 168, 153, 0.3);
+            top: 50%;
+            transform: translateY(-50%);
+            left: 0;
+            right: 0;
+            z-index: 1;
+        }
+        .timeline-item {
+            position: relative;
+            display: inline-block;
+            width: 280px;
+            margin: 0 auto;
+            vertical-align: middle;
+            z-index: 2;
+        }
+        .timeline-dot {
+            width: 12px;
+            height: 12px;
+            background-color: #8AA899;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 3;
+        }
+        .timeline-content {
+            transform: translateY(calc(-50% + 6px));
+        }
+        .archive-card {
+            height: 260px;
+            display: flex;
+            flex-direction: column;
+        }
+        .archive-title {
+            font-size: 1rem;
+            line-height: 1.2;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        .archive-excerpt {
+            font-size: 0.75rem;
+            line-height: 1.2;
+            color: rgba(255, 255, 255, 0.7);
+            display: -webkit-box;
+            -webkit-line-clamp: 4;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        .profile-bio {
+            font-size: 0.8rem;
+            line-height: 1.3;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        .sketch-icon {
+            position: relative;
+            width: 24px;
+            height: 24px;
+            display: inline-block;
+        }
+
+        .wave-avatar {
+            position: relative;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #8AA899, #E0E0D1);
+            padding: 3px;
+        }
+
+        .wave-avatar::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            border-radius: 50%;
+            background: conic-gradient(
+                from 0deg,
+                transparent 0deg,
+                #8AA899 30deg,
+                transparent 60deg,
+                #E0E0D1 90deg,
+                transparent 120deg,
+                #8AA899 150deg,
+                transparent 180deg,
+                #E0E0D1 210deg,
+                transparent 240deg,
+                #8AA899 270deg,
+                transparent 300deg,
+                #E0E0D1 330deg,
+                transparent 360deg
+            );
+            mask: radial-gradient(circle, transparent 45%, black 47%);
+            clip-path: polygon(
+                50% 0%, 61% 5%, 68% 0%, 74% 9%, 80% 4%, 86% 12%, 90% 7%, 94% 15%,
+                100% 10%, 95% 25%, 98% 35%, 93% 45%, 97% 55%, 92% 65%, 96% 75%, 91% 85%,
+                95% 95%, 85% 98%, 75% 94%, 65% 98%, 55% 93%, 45% 97%, 35% 92%, 25% 96%,
+                15% 91%, 5% 95%, 0% 85%, 4% 75%, 1% 65%, 6% 55%, 2% 45%, 7% 35%, 3% 25%,
+                8% 15%, 4% 5%
+            );
+        }
+
+        .wave-avatar img {
+            border-radius: 50%;
+            position: relative;
+            z-index: 1;
+        }
+    </style>
+</head>
+<body class="bg-black-custom text-white min-h-screen overflow-x-hidden relative">
+    <div id="bubbles-container" class="fixed inset-0 w-full h-full pointer-events-none z-0"></div>
+
+    <div class="relative z-10 px-4 py-6 max-w-7xl mx-auto">
+        <div class="mb-10 bg-white/5 backdrop-blur-md rounded-lg p-5 border border-white/10">
+            <div class="flex flex-col md:flex-row items-center gap-4">
+                 <div class="wave-avatar w-28 h-28 md:w-32 md:h-32">
+                    <img src="4.jpg" alt="yyy444" class="w-full h-full object-cover">
+                </div>
+
+                <div class="text-center md:text-left flex-1">
+                    <h1 class="text-xl font-bold mb-1 title-effect bg-gradient-to-r from-matcha to-linen-gray">
+                        yyy444 (YonallyYang)
+                    </h1>
+                    <p class="text-matcha text-sm mb-3">Blockchain & Decentralized Systems Explorer</p>
+                    
+                    <div class="flex flex-wrap gap-1 mb-3 justify-center md:justify-start max-w-2xl" id="blockchain-tags">
+                        <span class="blockchain-tag bg-matcha/20 text-matcha px-1.5 py-0.5 rounded-full text-[0.7rem] font-medium hover:bg-matcha/30" data-tag="DeFi">DeFi</span>
+                        <span class="blockchain-tag bg-linen-gray/20 text-linen-dark px-1.5 py-0.5 rounded-full text-[0.7rem] font-medium hover:bg-linen-gray/30" data-tag="NFT">NFT</span>
+                        <span class="blockchain-tag bg-matcha/20 text-matcha px-1.5 py-0.5 rounded-full text-[0.7rem] font-medium hover:bg-matcha/30" data-tag="DAO">DAO</span>
+                        <span class="blockchain-tag bg-linen-gray/20 text-linen-dark px-1.5 py-0.5 rounded-full text-[0.7rem] font-medium hover:bg-linen-gray/30" data-tag="Web3">Web3</span>
+                        <span class="blockchain-tag bg-matcha/20 text-matcha px-1.5 py-0.5 rounded-full text-[0.7rem] font-medium hover:bg-matcha/30" data-tag="Smart Contracts">Smart Contracts</span>
+                        <span class="blockchain-tag bg-linen-gray/20 text-linen-dark px-1.5 py-0.5 rounded-full text-[0.7rem] font-medium hover:bg-linen-gray/30" data-tag="Layer2">Layer2</span>
+                        <span class="blockchain-tag bg-matcha/20 text-matcha px-1.5 py-0.5 rounded-full text-[0.7rem] font-medium hover:bg-matcha/30" data-tag="ZK-Proofs">ZK-Proofs</span>
+                        <span class="blockchain-tag bg-linen-gray/20 text-linen-dark px-1.5 py-0.5 rounded-full text-[0.7rem] font-medium hover:bg-linen-gray/30" data-tag="Consensus">Consensus</span>
+                        <span class="blockchain-tag bg-matcha/20 text-matcha px-1.5 py-0.5 rounded-full text-[0.7rem] font-medium hover:bg-matcha/30" data-tag="Cross-Chain">Cross-Chain</span>
+                        <span class="blockchain-tag bg-linen-gray/20 text-linen-dark px-1.5 py-0.5 rounded-full text-[0.7rem] font-medium hover:bg-linen-gray/30" data-tag="Staking">Staking</span>
+                        <span class="blockchain-tag bg-matcha/20 text-matcha px-1.5 py-0.5 rounded-full text-[0.7rem] font-medium hover:bg-matcha/30" data-tag="MEV">MEV</span>
+                        <span class="blockchain-tag bg-linen-gray/20 text-linen-dark px-1.5 py-0.5 rounded-full text-[0.7rem] font-medium hover:bg-linen-gray/30" data-tag="Rollups">Rollups</span>
+                        <span class="blockchain-tag bg-matcha/20 text-matcha px-1.5 py-0.5 rounded-full text-[0.7rem] font-medium hover:bg-matcha/30" data-tag="Oracles">Oracles</span>
+                        <span class="blockchain-tag bg-linen-gray/20 text-linen-dark px-1.5 py-0.5 rounded-full text-[0.7rem] font-medium hover:bg-linen-gray/30" data-tag="DEX">DEX</span>
+                        <span class="blockchain-tag bg-matcha/20 text-matcha px-1.5 py-0.5 rounded-full text-[0.7rem] font-medium hover:bg-matcha/30" data-tag="Governance">Governance</span>
+                        <span class="blockchain-tag bg-linen-gray/20 text-linen-dark px-1.5 py-0.5 rounded-full text-[0.7rem] font-medium hover:bg-linen-gray/30" data-tag="Tokenomics">Tokenomics</span>
+                        <span class="blockchain-tag bg-matcha/20 text-matcha px-1.5 py-0.5 rounded-full text-[0.7rem] font-medium hover:bg-matcha/30" data-tag="Mining">Mining</span>
+                        <span class="blockchain-tag bg-linen-gray/20 text-linen-dark px-1.5 py-0.5 rounded-full text-[0.7rem] font-medium hover:bg-linen-gray/30" data-tag="Sharding">Sharding</span>
+                        <span class="blockchain-tag bg-matcha/20 text-matcha px-1.5 py-0.5 rounded-full text-[0.7rem] font-medium hover:bg-matcha/30" data-tag="Interoperability">Interoperability</span>
+                        <span class="blockchain-tag bg-linen-gray/20 text-linen-dark px-1.5 py-0.5 rounded-full text-[0.7rem] font-medium hover:bg-linen-gray/30" data-tag="Privacy">Privacy</span>
+                    </div>
+                    
+                    <div class="flex justify-center md:justify-start gap-3 mt-3">
+                        <a href="https://twitter.com/yyy444bone" class="text-gray-400 hover:text-matcha sketch-icon">
+                            <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/>
+                            </svg>
+                        </a>
+                        <a href="https://github.com/yyy444bone" class="text-gray-400 hover:text-matcha sketch-icon">
+                            <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+                            </svg>
+                        </a>
+                        <a href="mailto:yyy333000@outlook.com" class="text-gray-400 hover:text-matcha sketch-icon">
+                            <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="4" width="18" height="16" rx="2" ry="2"/>
+                                <polyline points="3 8 12 13 21 8"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mb-8">
+            <div class="timeline-container">
+                <div class="timeline-track">
+                    <div class="timeline-line"></div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <a href="0Gwhitepaper.html" class="block">
+                                <div class="archive-card bg-white/5 backdrop-blur-md rounded-lg p-4 border border-white/10 card-hover">
+                                    <div class="mb-2 flex justify-between items-center">
+                                        <span class="text-xs text-gray-400">2025.9.9</span>
+                                        <div class="flex items-center text-xs text-matcha">
+                                            <span>12 min read</span>
+                                            <span class="ml-2">• 4.2k words</span>
+                                        </div>
+                                    </div>
+                                    <h3 class="archive-title font-bold mb-2 text-white">
+                                        0G：完全去中心化 AI 操作系统（dAIOS）—— 打破垄断，推动 AGI 民主化的基础设施革命
+                                    </h3>
+                                    <p class="archive-excerpt mb-3">
+                                        关于0G白皮书的一份中字解读：深入分析0G如何通过四大核心网络（存储、DA、服务、共识）实现AI全生命周期的去中心化管理，打破当前AI产业的三重悖论，为AGI民主化铺平道路。
+                                    </p>
+                                    <div class="mt-auto flex flex-wrap">
+                                        <span class="article-tag bg-matcha/10 text-matcha-light tag-style font-medium whitespace-nowrap">Decentralized AI</span>
+                                        <span class="article-tag bg-linen-gray/10 text-linen-dark tag-style font-medium whitespace-nowrap">Blockchain</span>
+                                        <span class="article-tag bg-matcha/10 text-matcha-light tag-style font-medium whitespace-nowrap">0G</span>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function createBubbles() {
+            const container = document.getElementById('bubbles-container');
+            if (!container) {
+                console.error('未找到气泡容器！');
+                return;
+            }
+            
+            const bubbleCount = 9;
+            container.innerHTML = '';
+            
+            for (let i = 0; i < bubbleCount; i++) {
+                const bubble = document.createElement('div');
+                const size = Math.random() * 300 + 150;
+                const posX = Math.random() * 100;
+                const posY = Math.random() * 100;
+                const delay = Math.random() * 5;
+                const duration = Math.random() * 20 + 15;
+                
+                const colors = [
+                    'linear-gradient(135deg, #8AA899 0%, #8AA899 100%)',
+                    'linear-gradient(135deg, #8AA899 0%, #8AA899 100%)'
+                ];
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                
+                bubble.style.cssText = `
+                    position: absolute !important;
+                    width: ${size}px !important;
+                    height: ${size}px !important;
+                    left: ${posX}% !important;
+                    top: ${posY}% !important;
+                    background: ${color} !important;
+                    border-radius: 50% !important;
+                    filter: blur(1px) !important;
+                    animation: floatBubble ${duration}s ease-in-out ${delay}s infinite !important;
+                    opacity: ${0.08 + Math.random() * 0.12} !important;
+                    z-index: -1 !important;
+                    pointer-events: none !important;
+                `;
+                
+                container.appendChild(bubble);
+            }
+            
+            container.style.display = 'none';
+            container.offsetHeight;
+            container.style.display = 'block';
+        }
+        
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes floatBubble {
+                0% { transform: translate(0, 0) rotate(0deg); opacity: 0.1; }
+                25% { transform: translate(20px, -10px) rotate(5deg); opacity: 0.15; }
+                50% { transform: translate(40px, 0) rotate(0deg); opacity: 0.1; }
+                75% { transform: translate(20px, 10px) rotate(-5deg); opacity: 0.15; }
+                100% { transform: translate(0, 0) rotate(0deg); opacity: 0.1; }
+            }
+            .bubble {
+                position: absolute;
+                border-radius: 50%;
+                filter: blur(1px);
+                z-index: -1;
+            }
+        `;
+        document.head.appendChild(style);
+        
+        function initializeBubbles() {
+            try {
+                createBubbles();
+                const container = document.getElementById('bubbles-container');
+                if (container && container.children.length === 0) {
+                    throw new Error('气泡创建失败');
+                }
+            } catch (error) {
+                console.error('初始化气泡失败:', error);
+                setTimeout(createBubbles, 500);
+            }
+        }
+        
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initializeBubbles);
+        } else {
+            initializeBubbles();
+        }
+        
+        window.addEventListener('load', () => {
+            const container = document.getElementById('bubbles-container');
+            if (container && container.children.length === 0) {
+                setTimeout(createBubbles, 1000);
+            }
+        });
+        function initBlockchainTags() {
+            const tags = document.querySelectorAll('.blockchain-tag');
+            
+            tags.forEach(tag => {
+                tag.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-2px) scale(1.05)';
+                    this.classList.add('tag-glow');
+                });
+                
+                tag.addEventListener('mouseleave', function() {
+                    this.style.transform = '';
+                    this.classList.remove('tag-glow');
+                });
+                
+                tag.addEventListener('click', function() {
+                    tags.forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    this.classList.add('tag-pulse');
+                    setTimeout(() => {
+                        this.classList.remove('tag-pulse');
+                    }, 1500);
+                    console.log('Selected:', this.dataset.tag);
+                });
+            });
+            
+            function randomGlow() {
+                const randomTag = tags[Math.floor(Math.random() * tags.length)];
+                randomTag.classList.add('tag-glow');
+                setTimeout(() => {
+                    randomTag.classList.remove('tag-glow');
+                }, 2000);
+            }
+            
+            setInterval(randomGlow, Math.random() * 5000 + 5000);
+        }
+        
+        initBlockchainTags();
+    </script>
+</body>
+</html>
+    
